@@ -1,0 +1,34 @@
+*.iml
+.secret
+.secrets
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build-logic/build
+/build-logic/plugins/convention/build
+/build
+/buildSrc/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+androidApp/build
+androidApp/libs
+.idea
+androidApp/private_key.pepk
+androidApp/google-services.json
+androidApp/keystore.jks
+desktop/build
+wearApp/build
+keys.properties
+# iosApp
+instances/desktop/build
+# Services
+modules/services/core/build
+# Features ----------------------------------
