@@ -1,7 +1,5 @@
 @file:Suppress("UnusedPrivateMember")
 
-import ru.astrainteractive.gradleplugin.util.ProjectProperties.projectInfo
-
 plugins {
     kotlin("multiplatform")
     id("ru.astrainteractive.gradleplugin.java.core")

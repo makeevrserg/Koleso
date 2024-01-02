@@ -1,7 +1,6 @@
 package com.makeevrserg.koleso.desktop
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,8 +11,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -37,7 +34,7 @@ fun WheelButton(onClick: () -> Unit) {
 fun Wheel(wheelComponent: WheelComponent) {
     val model by wheelComponent.model.collectAsState()
     Column {
-        Text("${model}")
+        Text("$model")
         when (val model = model) {
             WheelComponent.Model.Pending -> {
                 Box(Modifier.size(64.dp).background(Color.Red))
@@ -59,7 +56,6 @@ fun Wheel(wheelComponent: WheelComponent) {
 }
 
 fun main() = application {
-
     val lifecycle = LifecycleRegistry()
     val rootComponentContext = DefaultComponentContext(lifecycle)
     val wheelComponent = runOnUiThread {
