@@ -13,7 +13,7 @@ interface WheelComponent {
 
     sealed interface Model {
         data object Pending : Model
-        class Wheeling(val degree: Float) : Model
-        class Wheeled(val degree: Float) : Model
+        data class Wheeling(val degree: Float, val power: Float) : Model
+        data class Wheeled(val degree: Float) : Model
     }
 }
