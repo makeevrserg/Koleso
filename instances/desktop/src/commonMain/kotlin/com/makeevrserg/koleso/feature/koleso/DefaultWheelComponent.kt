@@ -3,6 +3,7 @@ package com.makeevrserg.koleso.feature.koleso
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.instancekeeper.getOrCreate
 import com.makeevrserg.koleso.feature.koleso.domain.model.WheelConfiguration
+import com.makeevrserg.koleso.feature.koleso.domain.usecase.GetWheelConfigurationFlowUseCase
 import com.makeevrserg.koleso.feature.koleso.domain.usecase.GetWheelConfigurationFlowUseCaseImpl
 import com.makeevrserg.koleso.service.core.CoroutineFeature
 import kotlinx.coroutines.Job
@@ -16,7 +17,8 @@ class DefaultWheelComponent(
     componentContext: ComponentContext
 ) : WheelComponent,
     ComponentContext by componentContext {
-    private val getWheelFlowUseCase = GetWheelConfigurationFlowUseCaseImpl()
+    private val getWheelFlowUseCase: GetWheelConfigurationFlowUseCase
+        get() = GetWheelConfigurationFlowUseCaseImpl()
     override val configuration = MutableStateFlow<WheelConfiguration>(WheelConfiguration.Pending)
     private val coroutineFeature = instanceKeeper.getOrCreate {
         CoroutineFeature.Default()
