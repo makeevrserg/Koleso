@@ -22,6 +22,8 @@ class DefaultWheelComponent(
 
     private var job: Job? = null
 
+    fun f(x: Float) = (kotlin.math.cosh(x)-1)*45
+
     override fun startWheel() {
         coroutineFeature.launch {
             job?.cancelAndJoin()
@@ -33,8 +35,8 @@ class DefaultWheelComponent(
                 do {
                     val localModel = model.value as? WheelComponent.Model.Wheeling ?: return@launch
                     model.value = localModel.copy(
-                        power = localModel.power - 0.0005f,
-                        degree = localModel.degree + localModel.power * 30,
+                        power = localModel.power-0.001f,
+                        degree = localModel.degree + f(localModel.power),
                     )
                     delay(1.milliseconds)
                 } while (localModel.power > 0f)
