@@ -2,62 +2,51 @@ package com.makeevrserg.koleso.feature.koleso
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.instancekeeper.getOrCreate
+import com.makeevrserg.koleso.feature.koleso.domain.model.WheelConfiguration
+import com.makeevrserg.koleso.feature.koleso.domain.usecase.GetWheelConfigurationFlowUseCaseImpl
 import com.makeevrserg.koleso.service.core.CoroutineFeature
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.milliseconds
 
 class DefaultWheelComponent(
     componentContext: ComponentContext
 ) : WheelComponent,
     ComponentContext by componentContext {
-    override val model = MutableStateFlow<WheelComponent.Model>(WheelComponent.Model.Pending)
+    private val getWheelFlowUseCase = GetWheelConfigurationFlowUseCaseImpl()
+    override val configuration = MutableStateFlow<WheelConfiguration>(WheelConfiguration.Pending)
     private val coroutineFeature = instanceKeeper.getOrCreate {
         CoroutineFeature.Default()
     }
 
     private var job: Job? = null
 
-    fun f(x: Float) = (kotlin.math.cosh(x)-1)*45
-
     override fun startWheel() {
         coroutineFeature.launch {
             job?.cancelAndJoin()
-            job = launch {
-                val prevDegree = (model.value as? WheelComponent.Model.Wheeled)?.degree
-                    ?: (model.value as? WheelComponent.Model.Wheeling)?.degree
-                    ?: 0f
-                model.value = WheelComponent.Model.Wheeling(degree = prevDegree, power = 1f)
-                do {
-                    val localModel = model.value as? WheelComponent.Model.Wheeling ?: return@launch
-                    model.value = localModel.copy(
-                        power = localModel.power-0.001f,
-                        degree = localModel.degree + f(localModel.power),
-                    )
-                    delay(1.milliseconds)
-                } while (localModel.power > 0f)
-                model.update {
-                    (it as? WheelComponent.Model.Wheeling)?.let {
-                        WheelComponent.Model.Wheeled(it.degree)
-                    } ?: it
-                }
+            job = getWheelFlowUseCase.invoke { configuration.value }
+                .onEach { configuration.value = it }
+                .launchIn(coroutineFeature)
+
+            job?.invokeOnCompletion {
+                job?.cancel()
+                job = null
             }
         }
     }
 
     override fun stopWheel() {
-        model.value = when (val currentModel = model.value) {
-            WheelComponent.Model.Pending -> currentModel
-            is WheelComponent.Model.Wheeled -> currentModel
-            is WheelComponent.Model.Wheeling -> WheelComponent.Model.Wheeled(currentModel.degree)
+        configuration.value = when (val currentModel = configuration.value) {
+            WheelConfiguration.Pending -> currentModel
+            is WheelConfiguration.Wheeled -> currentModel
+            is WheelConfiguration.Wheeling -> WheelConfiguration.Wheeled(currentModel.degree)
         }
     }
 
     override fun reset() {
-        model.value = WheelComponent.Model.Pending
+        configuration.value = WheelConfiguration.Pending
     }
 }
