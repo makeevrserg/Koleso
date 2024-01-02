@@ -2,8 +2,10 @@ package com.makeevrserg.koleso.desktop
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -11,8 +13,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -33,23 +37,27 @@ fun WheelButton(onClick: () -> Unit) {
 @Composable
 fun Wheel(wheelComponent: WheelComponent) {
     val model by wheelComponent.configuration.collectAsState()
-    Column {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text("$model")
         when (val model = model) {
             WheelConfiguration.Pending -> {
-                Box(Modifier.size(64.dp).background(Color.Red))
+                Box(Modifier.size(128.dp).background(Color.Red))
                 WheelButton(wheelComponent::startWheel)
             }
 
             is WheelConfiguration.Wheeled -> {
                 val degree by animateFloatAsState(model.degree)
-                Box(Modifier.size(64.dp).rotate(degree).background(Color.Red))
+                Box(Modifier.size(128.dp).rotate(degree).background(Color.Green))
                 WheelButton(wheelComponent::startWheel)
             }
 
             is WheelConfiguration.Wheeling -> {
                 val degree by animateFloatAsState(model.degree)
-                Box(Modifier.size(64.dp).rotate(degree).background(Color.Red))
+                Box(Modifier.size(128.dp).rotate(degree).background(Color.Red))
             }
         }
     }
