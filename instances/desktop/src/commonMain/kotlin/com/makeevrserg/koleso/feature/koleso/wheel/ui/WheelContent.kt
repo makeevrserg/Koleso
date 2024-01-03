@@ -48,8 +48,5 @@ fun WheelContent(wheelComponent: WheelComponent, participantsComponent: Particip
                 )
             }
         }
-        AnimatedVisibility(wheelConfiguration !is WheelConfiguration.Wheeling) {
-            WheelButton(wheelComponent::startWheel)
-        }
     }
 }
