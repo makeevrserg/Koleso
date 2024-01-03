@@ -11,6 +11,6 @@ interface WinnerComponent {
 
     sealed interface Model {
         data object Pending : Model
-        data class Winner(val participantWithArc: ParticipantWithArc): Model
+        data class Winner(val participantWithArc: ParticipantWithArc) : Model
     }
 }

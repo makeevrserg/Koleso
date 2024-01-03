@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class DefaultWheelComponent(
     componentContext: ComponentContext,
     private val onFinished: (WheelConfiguration.Wheeled) -> Unit,
-    private val onStarted: ()->Unit
+    private val onStarted: () -> Unit
 ) : WheelComponent,
     ComponentContext by componentContext {
     private val getWheelFlowUseCase: GetWheelConfigurationFlowUseCase
