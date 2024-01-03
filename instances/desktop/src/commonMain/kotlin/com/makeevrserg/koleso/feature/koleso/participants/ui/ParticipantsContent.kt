@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DialogComponent
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantWithArc
 import com.makeevrserg.koleso.feature.koleso.participants.presentation.ParticipantsComponent
 import androidx.compose.material3.MaterialTheme as Material3Theme
@@ -97,7 +98,8 @@ fun ParticipantContent(entry: ParticipantWithArc, onDeleteClicked: () -> Unit, o
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ParticipantsContent(
-    participantsComponent: ParticipantsComponent
+    participantsComponent: ParticipantsComponent,
+    dialogComponent: DialogComponent
 ) {
     val participantsModel by participantsComponent.model.collectAsState()
     Column(
@@ -119,6 +121,7 @@ fun ParticipantsContent(
                 ParticipantContent(
                     entry = entry,
                     onEditClicked = {
+                        dialogComponent.openEditParticipant(entry.participantModel.desc)
                     },
                     onDeleteClicked = {
                         participantsComponent.removeParticipant(entry.participantModel)

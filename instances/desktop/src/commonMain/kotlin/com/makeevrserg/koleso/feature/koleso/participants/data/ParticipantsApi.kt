@@ -9,6 +9,7 @@ interface ParticipantsApi {
     suspend fun getParticipants(): List<ParticipantModel>
     suspend fun addParticipant(participantModel: ParticipantModel)
     suspend fun removeParticipant(participantModel: ParticipantModel)
+    suspend fun getParticipant(id: String): ParticipantModel?
 
     companion object {
         val instance: ParticipantsApi = ParticipantsApiImpl()
@@ -33,10 +34,14 @@ private class ParticipantsApiImpl : ParticipantsApi {
     }
 
     override suspend fun addParticipant(participantModel: ParticipantModel) {
-        participants.value = participants.value.toMutableList() + participantModel
+        participants.value = participants.value.filter { it.desc != participantModel.desc } + participantModel
     }
 
     override suspend fun removeParticipant(participantModel: ParticipantModel) {
-        participants.value = participants.value.toMutableList() - participantModel
+        participants.value -= participantModel
+    }
+
+    override suspend fun getParticipant(id: String): ParticipantModel? {
+        return participants.value.firstOrNull { it.desc == id }
     }
 }

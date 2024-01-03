@@ -2,6 +2,7 @@ package com.makeevrserg.koleso.feature.koleso.root.presentation
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.childContext
+import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DialogComponent
 import com.makeevrserg.koleso.feature.koleso.participants.presentation.DefaultParticipantsComponent
 import com.makeevrserg.koleso.feature.koleso.participants.presentation.ParticipantsComponent
 import com.makeevrserg.koleso.feature.koleso.wheel.presentation.DefaultWheelComponent
@@ -10,7 +11,8 @@ import com.makeevrserg.koleso.feature.koleso.winner.presentation.DefaultWinnerCo
 import com.makeevrserg.koleso.feature.koleso.winner.presentation.WinnerComponent
 
 class DefaultRootKolesoComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    override val dialogComponent: DialogComponent
 ) : RootKolesoComponent, ComponentContext by componentContext {
     override val participantsComponent: ParticipantsComponent = DefaultParticipantsComponent(
         componentContext = childContext("ParticipantsComponent")

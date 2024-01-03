@@ -27,7 +27,12 @@ fun KolesoScreen(
                 modifier = Modifier.animateContentSize(),
                 horizontalAlignment = Alignment.End
             ) {
-                AddParticipantFloatingActionButton(rootKolesoComponent.wheelComponent, onClick = {})
+                AddParticipantFloatingActionButton(
+                    wheelComponent = rootKolesoComponent.wheelComponent,
+                    onClick = {
+                        rootKolesoComponent.dialogComponent.openEditParticipant()
+                    }
+                )
                 WheelExtendedFloatingActionButton(rootKolesoComponent.wheelComponent)
             }
         },
@@ -39,7 +44,7 @@ fun KolesoScreen(
         ) {
             WheelContent(rootKolesoComponent.wheelComponent, rootKolesoComponent.participantsComponent)
             WinnerContent(rootKolesoComponent.winnerComponent)
-            ParticipantsContent(rootKolesoComponent.participantsComponent)
+            ParticipantsContent(rootKolesoComponent.participantsComponent, rootKolesoComponent.dialogComponent)
         }
     }
 }

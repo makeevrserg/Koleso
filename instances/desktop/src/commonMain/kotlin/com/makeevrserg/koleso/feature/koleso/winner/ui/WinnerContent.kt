@@ -22,68 +22,78 @@ import com.makeevrserg.koleso.feature.koleso.winner.presentation.WinnerComponent
 import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @Composable
+private fun WinnerRotatingContent(model: WinnerComponent.Model.Rotating) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier.height(4.dp)
+                .width(24.dp)
+                .background(Color(model.participantWithArc.arcModel.argbColor))
+        )
+        Text(
+            text = "✨${model.participantWithArc.participantModel.desc}✨",
+            textAlign = TextAlign.Center,
+            color = Material3Theme.colorScheme.onPrimaryContainer
+        )
+        Box(
+            modifier = Modifier.height(4.dp)
+                .width(24.dp)
+                .background(Color(model.participantWithArc.arcModel.argbColor))
+        )
+    }
+}
+
+@Composable
+private fun WinnerCompletedContent(model: WinnerComponent.Model.Winner) {
+    Column {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier.height(4.dp)
+                    .width(24.dp)
+                    .background(Color(model.participantWithArc.arcModel.argbColor))
+            )
+            Column(
+                modifier = Modifier,
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "✨Winner is ${model.participantWithArc.participantModel.desc}!✨",
+                    textAlign = TextAlign.Center,
+                    color = Material3Theme.colorScheme.onPrimaryContainer
+                )
+                Text(
+                    text = "\uD83D\uDE80Total points: ${model.participantWithArc.participantModel.point}!\uD83D\uDE80",
+                    textAlign = TextAlign.Center,
+                    color = Material3Theme.colorScheme.onPrimaryContainer
+                )
+            }
+            Box(
+                modifier = Modifier.height(4.dp)
+                    .width(24.dp)
+                    .background(Color(model.participantWithArc.arcModel.argbColor))
+            )
+        }
+    }
+}
+
+@Composable
 fun WinnerContent(winnerComponent: WinnerComponent) {
     val model by winnerComponent.model.collectAsState()
-    Crossfade(model, modifier = Modifier.animateContentSize()) {
+    Crossfade(targetState = model, modifier = Modifier.animateContentSize()) {
         when (val model = model) {
             WinnerComponent.Model.Pending -> Box(Modifier)
             is WinnerComponent.Model.Rotating -> {
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = Modifier.height(4.dp)
-                            .width(24.dp)
-                            .background(Color(model.participantWithArc.arcModel.argbColor))
-                    )
-                    Text(
-                        text = "✨${model.participantWithArc.participantModel.desc}✨",
-                        textAlign = TextAlign.Center,
-                        color = Material3Theme.colorScheme.onPrimaryContainer
-                    )
-                    Box(
-                        modifier = Modifier.height(4.dp)
-                            .width(24.dp)
-                            .background(Color(model.participantWithArc.arcModel.argbColor))
-                    )
-                }
+                WinnerRotatingContent(model = model)
             }
 
             is WinnerComponent.Model.Winner -> {
-                Column {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier.height(4.dp)
-                                .width(24.dp)
-                                .background(Color(model.participantWithArc.arcModel.argbColor))
-                        )
-                        Column(
-                            modifier = Modifier,
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "✨Winner is ${model.participantWithArc.participantModel.desc}!✨",
-                                textAlign = TextAlign.Center,
-                                color = Material3Theme.colorScheme.onPrimaryContainer
-                            )
-                            Text(
-                                text = "\uD83D\uDE80Total points: ${model.participantWithArc.participantModel.point}!\uD83D\uDE80",
-                                textAlign = TextAlign.Center,
-                                color = Material3Theme.colorScheme.onPrimaryContainer
-                            )
-                        }
-                        Box(
-                            modifier = Modifier.height(4.dp)
-                                .width(24.dp)
-                                .background(Color(model.participantWithArc.arcModel.argbColor))
-                        )
-                    }
-                }
+                WinnerCompletedContent(model = model)
             }
         }
     }
