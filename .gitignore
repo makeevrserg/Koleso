@@ -32,4 +32,6 @@ keys.properties
 instances/desktop/build
 # Services
 modules/services/core/build
+modules/services/core-ui/build
 # Features ----------------------------------
+modules/features/root/build

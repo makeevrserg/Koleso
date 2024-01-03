@@ -1,25 +1,25 @@
 @file:Suppress("UnusedPrivateMember")
 
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import ru.astrainteractive.gradleplugin.util.ProjectProperties.projectInfo
 
 
 plugins {
-    kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("com.android.library")
+    kotlin("multiplatform")
     id("ru.astrainteractive.gradleplugin.java.core")
+    id("ru.astrainteractive.gradleplugin.android.core")
+    id("ru.astrainteractive.gradleplugin.android.compose")
 }
 kotlin {
-    jvm {
-        withJava()
-    }
+    jvm()
+    androidTarget()
     targetHierarchy.default()
     sourceSets {
-        val jvmMain by getting {
-            resources.srcDirs("build/generated/moko/jvmMain/src")
+        val commonMain by getting {
             dependencies {
                 // Compose
-                implementation(compose.desktop.currentOs)
+                implementation(compose.material)
                 implementation(compose.material3)
                 // Decompose
                 implementation(libs.decompose.core)
@@ -32,7 +32,6 @@ kotlin {
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
-                implementation(projects.modules.features.root)
             }
         }
         val commonTest by getting {
@@ -43,13 +42,6 @@ kotlin {
     }
 }
 
-compose.desktop {
-    application {
-        mainClass = "${projectInfo.group}.desktop.MainKt"
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "jvm"
-            packageVersion = projectInfo.versionString
-        }
-    }
+android {
+    namespace = "${projectInfo.group}.core.ui"
 }

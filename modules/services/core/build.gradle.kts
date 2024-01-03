@@ -1,12 +1,18 @@
 @file:Suppress("UnusedPrivateMember")
 
+import ru.astrainteractive.gradleplugin.util.ProjectProperties.projectInfo
+
+
 plugins {
+    id("com.android.library")
     kotlin("multiplatform")
     id("ru.astrainteractive.gradleplugin.java.core")
+    id("ru.astrainteractive.gradleplugin.android.core")
 }
 
 kotlin {
     jvm()
+    androidTarget()
     targetHierarchy.default()
     sourceSets {
         val commonMain by getting {
@@ -23,4 +29,8 @@ kotlin {
             }
         }
     }
+}
+
+android {
+    namespace = "${projectInfo.group}.core"
 }

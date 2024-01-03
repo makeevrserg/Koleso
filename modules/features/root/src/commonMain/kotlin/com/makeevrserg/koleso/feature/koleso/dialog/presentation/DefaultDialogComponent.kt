@@ -33,7 +33,11 @@ class DefaultDialogComponent(
     }
 
     override fun openEditParticipant(id: String?) {
-        slotNavigation.activate(Configuration.EditParticipant(id))
+        slotNavigation.activate(
+            Configuration.EditParticipant(
+                id
+            )
+        )
     }
 
     override fun dismiss() {
@@ -42,6 +46,7 @@ class DefaultDialogComponent(
 
     private sealed interface Configuration : Parcelable {
         @Parcelize
-        class EditParticipant(val id: String? = null) : Configuration
+        class EditParticipant(val id: String? = null) :
+            Configuration
     }
 }

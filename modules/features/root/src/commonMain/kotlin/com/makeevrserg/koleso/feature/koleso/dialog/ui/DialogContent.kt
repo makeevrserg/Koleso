@@ -26,7 +26,6 @@ fun DialogContent(dialogComponent: DialogComponent) {
                         .wrapContentHeight()
                         .padding(16.dp),
                     shape = RoundedCornerShape(16.dp),
-//                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background)
                 ) {
                     EditParticipantContent(
                         editParticipantComponent = instance.editParticipantComponent,

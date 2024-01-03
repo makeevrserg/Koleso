@@ -25,3 +25,6 @@ rootProject.name = "Koleso"
 include(":instances:desktop")
 // Services
 include(":modules:services:core")
+include(":modules:services:core-ui")
+// Features
+include(":modules:features:root")

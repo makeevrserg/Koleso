@@ -1,4 +1,4 @@
-package com.makeevrserg.koleso.service.theme
+package com.makeevrserg.koleso.service.core.ui.theme
 
 import androidx.compose.material.darkColors
 import androidx.compose.material3.MaterialTheme

@@ -11,7 +11,7 @@ import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DefaultDialogCo
 import com.makeevrserg.koleso.feature.koleso.dialog.ui.DialogContent
 import com.makeevrserg.koleso.feature.koleso.root.presentation.DefaultRootKolesoComponent
 import com.makeevrserg.koleso.feature.koleso.root.ui.KolesoScreen
-import com.makeevrserg.koleso.service.theme.CustomTheme
+import com.makeevrserg.koleso.service.core.ui.theme.CustomTheme
 
 fun main() = application {
     val lifecycle = LifecycleRegistry()
