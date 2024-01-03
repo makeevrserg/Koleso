@@ -3,6 +3,8 @@ package com.makeevrserg.koleso.desktop
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.window.Tray
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.arkivanov.decompose.DefaultComponentContext
@@ -29,7 +31,18 @@ fun main() = application {
         )
     }
 
-    Window(onCloseRequest = ::exitApplication) {
+    val icon = painterResource("empire_astra_trans.png")
+    Tray(
+        icon = icon,
+        menu = {
+            Item("Close", onClick = ::exitApplication)
+        }
+    )
+    Window(
+        onCloseRequest = ::exitApplication,
+        icon = icon,
+        title = "Koleso: EmpireProjekt"
+    ) {
         Material3Theme(
             colorScheme = darkColorScheme()
         ) {
