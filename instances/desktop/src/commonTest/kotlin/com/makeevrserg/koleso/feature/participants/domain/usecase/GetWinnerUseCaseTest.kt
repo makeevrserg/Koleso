@@ -36,4 +36,19 @@ class GetWinnerUseCaseTest {
             }
         }
     }
+
+    @Test
+    fun testDegree2() {
+        val data = CreateParticipantWithArcUseCaseImpl().invoke(
+            participants = listOf(
+                ParticipantModel("Part 0", 6),
+                ParticipantModel("Part 1", 0),
+                ParticipantModel("Part 2", 5),
+            )
+        )
+        GetWinnerUseCaseImpl().getWinner(3382f, data).let { winner ->
+            println("Degree: 645.24915f, winner: $winner")
+            assertEquals(data[2], winner)
+        }
+    }
 }

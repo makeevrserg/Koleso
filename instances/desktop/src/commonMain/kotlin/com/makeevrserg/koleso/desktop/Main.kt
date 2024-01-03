@@ -53,7 +53,7 @@ fun Circle(
 //        drawCircle(Color.Blue, radius = size / 2)
         data.forEach { entry ->
             drawArc(
-                startAngle = entry.arcModel.startAngle,
+                startAngle = entry.arcModel.startAngle-90,
                 sweepAngle = entry.arcModel.sweepAngle,
                 color = Color(entry.arcModel.argbColor),
                 useCenter = true,

@@ -21,15 +21,15 @@ class GetWinnerUseCaseImpl : GetWinnerUseCase {
             val endAngle = arc.endAngle + degree
             when {
                 startAngle <= 360 && endAngle <= 360f -> {
-                    0f in startAngle..endAngle
+                    false
                 }
 
                 startAngle <= 360f && endAngle >= 360f -> {
-                    0f in startAngle..360f || 0f in 0f..(endAngle % 360f)
+                    true
                 }
 
                 startAngle >= 360f && endAngle >= 360f -> {
-                    0f in (startAngle % 360f)..(endAngle % 360f)
+                    false
                 }
 
                 else -> error("Not implemented")

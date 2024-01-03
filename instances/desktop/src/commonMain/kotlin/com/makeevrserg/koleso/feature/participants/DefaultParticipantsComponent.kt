@@ -12,17 +12,16 @@ class DefaultParticipantsComponent(
 ) : ParticipantsComponent, ComponentContext by componentContext {
     private val createParticipantWithArcUseCase = CreateParticipantWithArcUseCaseImpl()
     override val model = MutableStateFlow(ParticipantsComponent.Model())
-    private fun createParticipants() = List(Random.nextInt(3, 5)) {
-        ParticipantModel("Participant $it", Random.nextInt(0, 14))
-    }
 
-    private fun createWiredModel(participants: List<ParticipantModel>): List<ParticipantWithArc> {
-        return createParticipantWithArcUseCase.invoke(participants)
-    }
+    private fun createParticipants() = listOf(
+        ParticipantModel("Part 0", 6),
+        ParticipantModel("Part 1", 0),
+        ParticipantModel("Part 2", 5),
+    )
 
     override fun fillData(participants: List<ParticipantModel>) {
         model.value = ParticipantsComponent.Model(
-            data = createWiredModel(participants)
+            data = createParticipantWithArcUseCase.invoke(participants)
         )
     }
 
