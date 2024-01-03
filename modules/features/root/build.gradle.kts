@@ -28,7 +28,6 @@ kotlin {
                 implementation(libs.klibs.kdi)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
-                implementation(libs.kotlin.coroutines.swing)
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
