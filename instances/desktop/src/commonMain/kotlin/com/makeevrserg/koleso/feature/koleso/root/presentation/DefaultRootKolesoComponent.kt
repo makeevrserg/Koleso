@@ -25,6 +25,9 @@ class DefaultRootKolesoComponent(
         },
         onStarted = {
             winnerComponent.reset()
+        },
+        onRotating = {
+            winnerComponent.onWheelRotating(it.degree, participantsComponent.model.value.data)
         }
     )
 }

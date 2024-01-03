@@ -26,6 +26,28 @@ fun WinnerContent(winnerComponent: WinnerComponent) {
     Crossfade(model, modifier = Modifier.animateContentSize()) {
         when (val model = model) {
             WinnerComponent.Model.Pending -> Box(Modifier)
+            is WinnerComponent.Model.Rotating -> {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier.height(4.dp)
+                            .width(24.dp)
+                            .background(Color(model.participantWithArc.arcModel.argbColor))
+                    )
+                    Text(
+                        text = "✨${model.participantWithArc.participantModel.desc}✨",
+                        textAlign = TextAlign.Center
+                    )
+                    Box(
+                        modifier = Modifier.height(4.dp)
+                            .width(24.dp)
+                            .background(Color(model.participantWithArc.arcModel.argbColor))
+                    )
+                }
+            }
+
             is WinnerComponent.Model.Winner -> {
                 Column {
                     Row(

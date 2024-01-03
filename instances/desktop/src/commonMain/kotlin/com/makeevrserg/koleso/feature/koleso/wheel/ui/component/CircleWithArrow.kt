@@ -23,6 +23,7 @@ fun CircleWithArrow(
     participantsModel: ParticipantsComponent.Model
 ) {
     val degree by animateFloatAsState(wheelConfiguration.degree)
+
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
         Icon(
             imageVector = Icons.Filled.KeyboardArrowDown,

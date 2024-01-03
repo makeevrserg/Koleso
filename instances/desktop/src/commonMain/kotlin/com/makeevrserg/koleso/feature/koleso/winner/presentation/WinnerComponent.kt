@@ -7,10 +7,12 @@ interface WinnerComponent {
     val model: StateFlow<Model>
 
     fun onWheelRotated(degree: Float, data: List<ParticipantWithArc>)
+    fun onWheelRotating(degree: Float, data: List<ParticipantWithArc>)
     fun reset()
 
     sealed interface Model {
         data object Pending : Model
+        data class Rotating(val participantWithArc: ParticipantWithArc) : Model
         data class Winner(val participantWithArc: ParticipantWithArc) : Model
     }
 }

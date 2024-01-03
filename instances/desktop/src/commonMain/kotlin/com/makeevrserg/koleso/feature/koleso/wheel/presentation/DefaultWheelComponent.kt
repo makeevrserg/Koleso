@@ -16,7 +16,8 @@ import kotlinx.coroutines.launch
 class DefaultWheelComponent(
     componentContext: ComponentContext,
     private val onFinished: (WheelConfiguration.Wheeled) -> Unit,
-    private val onStarted: () -> Unit
+    private val onStarted: () -> Unit,
+    private val onRotating: (WheelConfiguration.Wheeling) -> Unit
 ) : WheelComponent,
     ComponentContext by componentContext {
     private val getWheelFlowUseCase: GetWheelConfigurationFlowUseCase
@@ -33,7 +34,10 @@ class DefaultWheelComponent(
         coroutineFeature.launch {
             job?.cancelAndJoin()
             job = getWheelFlowUseCase.invoke { configuration.value }
-                .onEach { configuration.value = it }
+                .onEach {
+                    configuration.value = it
+                    (it as? WheelConfiguration.Wheeling)?.let(onRotating)
+                }
                 .launchIn(coroutineFeature)
 
             job?.invokeOnCompletion {

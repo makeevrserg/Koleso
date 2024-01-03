@@ -30,7 +30,7 @@ class GetWheelConfigurationFlowUseCaseImpl : GetWheelConfigurationFlowUseCase {
      * Calculates next power gain
      */
     private fun getNextPower(power: Float): Float {
-        return power - 0.01f
+//        return power - 0.01f
         return when {
             power > 0.3f -> power - 0.001f
             power > 0.2f -> power - 0.0008f

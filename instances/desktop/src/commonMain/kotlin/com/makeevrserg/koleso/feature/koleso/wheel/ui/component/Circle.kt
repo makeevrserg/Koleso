@@ -53,7 +53,7 @@ fun Circle(
                     width = 2.dp.value,
                     cap = StrokeCap.Round,
                     join = StrokeJoin.Round
-                    ),
+                ),
             )
         }
     }
