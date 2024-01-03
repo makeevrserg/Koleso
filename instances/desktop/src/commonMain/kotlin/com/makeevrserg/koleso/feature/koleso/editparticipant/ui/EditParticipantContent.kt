@@ -6,10 +6,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,7 +38,6 @@ fun EditParticipantContent(
             value = model.name,
             onValueChange = editParticipantComponent::changeName,
             textStyle = Material3Theme.typography.bodyMedium,
-            colors = TextFieldDefaults.textFieldColors(textColor = Material3Theme.colorScheme.onSecondaryContainer),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -52,7 +50,6 @@ fun EditParticipantContent(
             value = model.pointsTextField,
             onValueChange = editParticipantComponent::changePoints,
             textStyle = Material3Theme.typography.bodyMedium,
-            colors = TextFieldDefaults.textFieldColors(textColor = Material3Theme.colorScheme.onSecondaryContainer),
             modifier = Modifier.fillMaxWidth()
         )
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
