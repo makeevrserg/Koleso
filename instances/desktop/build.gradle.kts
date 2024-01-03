@@ -47,7 +47,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "jvm"
-            packageVersion = "1.0.0"
+            packageVersion = projectInfo.versionString
         }
     }
 }
