@@ -9,6 +9,7 @@ plugins {
     id("ru.astrainteractive.gradleplugin.java.core")
     id("ru.astrainteractive.gradleplugin.android.core")
     id("ru.astrainteractive.gradleplugin.android.apk.name")
+    id("ru.astrainteractive.gradleplugin.android.compose")
 }
 
 android {
@@ -72,12 +73,6 @@ android {
             isDebuggable = true
             signingConfig = signingConfigs.getByName("debug")
         }
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlin.compilerExtensionVersion.get()
     }
     packagingOptions {
         with(resources.excludes) {

@@ -2,6 +2,7 @@ package com.makeevrserg.koleso.feature.koleso.wheel.ui.component
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
@@ -31,6 +32,8 @@ fun CircleWithArrow(
             modifier = Modifier.size(24.dp),
             tint = Material3Theme.colorScheme.error
         )
-        Circle(data = participantsModel.data, modifier = Modifier.rotate(degree), size = 240.dp)
+        Box(modifier = Modifier.size(240.dp), contentAlignment = Alignment.Center) {
+            Circle(data = participantsModel.data, modifier = Modifier.rotate(degree))
+        }
     }
 }
