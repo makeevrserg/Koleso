@@ -1,0 +1,3 @@
+package com.makeevrserg.koleso.feature.koleso.editparticipant.presentation
+
+interface EditParticipantComponent

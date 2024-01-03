@@ -18,7 +18,7 @@ class GetWheelConfigurationFlowUseCaseImpl : GetWheelConfigurationFlowUseCase {
     private val random = Random(seed)
 
     private val rotationGain = (random.nextInt(40, 45)) + random.nextFloat()
-    private val initialPower = random.nextDouble(0.7, 1.4).toFloat() + sqrt(random.nextFloat()/2)
+    private val initialPower = random.nextDouble(0.7, 1.4).toFloat() + sqrt(random.nextFloat() / 2)
 
     /**
      * Returns current rotation amount by it's [power]

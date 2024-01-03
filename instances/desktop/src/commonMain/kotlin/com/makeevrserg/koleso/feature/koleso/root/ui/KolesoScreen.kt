@@ -8,7 +8,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.makeevrserg.koleso.feature.koleso.participants.ui.ParticipantsContent
+import com.makeevrserg.koleso.feature.koleso.participants.ui.component.AddParticipantFloatingActionButton
 import com.makeevrserg.koleso.feature.koleso.root.presentation.DefaultRootKolesoComponent
 import com.makeevrserg.koleso.feature.koleso.wheel.ui.WheelContent
 import com.makeevrserg.koleso.feature.koleso.wheel.ui.component.WheelExtendedFloatingActionButton
@@ -20,8 +22,15 @@ fun KolesoScreen(
 ) {
     Scaffold(
         floatingActionButton = {
-            WheelExtendedFloatingActionButton(rootKolesoComponent.wheelComponent)
-        }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                modifier = Modifier.animateContentSize(),
+                horizontalAlignment = Alignment.End
+            ) {
+                AddParticipantFloatingActionButton(rootKolesoComponent.wheelComponent, onClick = {})
+                WheelExtendedFloatingActionButton(rootKolesoComponent.wheelComponent)
+            }
+        },
     ) {
         Column(
             modifier = Modifier.fillMaxSize().animateContentSize(),

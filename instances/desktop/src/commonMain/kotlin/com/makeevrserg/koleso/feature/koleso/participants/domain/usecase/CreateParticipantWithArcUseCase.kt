@@ -1,7 +1,7 @@
 package com.makeevrserg.koleso.feature.koleso.participants.domain.usecase
 
+import com.makeevrserg.koleso.feature.koleso.participants.data.model.ParticipantModel
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ArcModel
-import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantModel
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantWithArc
 import kotlin.random.Random
 
