@@ -49,7 +49,7 @@ class GetWheelConfigurationFlowUseCaseImpl : GetWheelConfigurationFlowUseCase {
 
     override fun invoke(getModel: () -> WheelConfiguration) = flow {
         WheelConfiguration.Wheeling(
-            degree = getPrevDegree(getModel.invoke()),
+            degree = getPrevDegree(getModel.invoke()) + random.nextFloat() * 360,
             power = initialPower
         ).run { emit(this) }
 
