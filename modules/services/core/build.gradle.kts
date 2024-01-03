@@ -11,6 +11,9 @@ plugins {
 }
 
 kotlin {
+    js {
+        browser()
+    }
     jvm()
     androidTarget()
     targetHierarchy.default()

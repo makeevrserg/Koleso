@@ -24,6 +24,7 @@ rootProject.name = "Koleso"
 // Instances
 include(":instances:desktop")
 include(":instances:androidApp")
+include(":instances:web")
 // Services
 include(":modules:services:core")
 include(":modules:services:core-ui")

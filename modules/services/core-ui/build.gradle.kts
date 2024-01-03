@@ -11,6 +11,9 @@ plugins {
     id("ru.astrainteractive.gradleplugin.android.compose")
 }
 kotlin {
+    js {
+        browser()
+    }
     jvm()
     androidTarget()
     sourceSets {

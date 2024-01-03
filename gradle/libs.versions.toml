@@ -62,7 +62,7 @@ moko-resources = "0.23.0"
 moko-network = "0.21.0"
 
 # Decompose
-decompose = "2.0.1"
+decompose = "2.0.1-compose-experimental"
 essenty = "1.1.0"
 
 # MVIKotlin

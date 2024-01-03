@@ -1,28 +1,30 @@
 @file:Suppress("UnusedPrivateMember")
 
-import ru.astrainteractive.gradleplugin.util.ProjectProperties.projectInfo
-
-
 plugins {
-    id("org.jetbrains.compose")
-    id("com.android.library")
     kotlin("multiplatform")
-    id("ru.astrainteractive.gradleplugin.java.core")
-    id("ru.astrainteractive.gradleplugin.android.core")
-    id("ru.astrainteractive.gradleplugin.android.compose")
+    id("org.jetbrains.compose")
 }
+
 kotlin {
     js {
         browser()
+        binaries.executable()
     }
-    jvm()
-    androidTarget()
-    targetHierarchy.default()
+
     sourceSets {
+        all {
+            languageSettings {
+                optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
+            }
+        }
         val commonMain by getting {
             dependencies {
+                implementation(compose.runtime)
+                implementation(compose.material3)
+                implementation(compose.materialIconsExtended)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
                 // Compose
-                implementation(compose.material)
                 implementation(compose.material3)
                 // Decompose
                 implementation(libs.decompose.core)
@@ -34,17 +36,18 @@ kotlin {
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
+                implementation(projects.modules.features.root)
             }
         }
-        val commonTest by getting {
+
+        val jsMain by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(compose.html.core)
             }
         }
     }
 }
 
-android {
-    apply(plugin = "kotlin-parcelize")
-    namespace = "${projectInfo.group}.core.ui"
+compose.experimental {
+    web.application {}
 }
