@@ -118,7 +118,7 @@ dependencies {
     implementation(libs.moko.resources.core)
     // Decompose
     implementation(libs.decompose.core)
-    implementation(libs.decompose.compose.jetpack)
+    implementation(libs.decompose.compose.jetbrains)
     implementation(libs.decompose.android)
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.android.gms:play-services-wearable:18.0.0")
