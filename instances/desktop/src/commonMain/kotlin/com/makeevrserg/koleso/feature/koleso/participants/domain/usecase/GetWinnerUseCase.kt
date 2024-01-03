@@ -4,14 +4,14 @@ import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ArcModel
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantWithArc
 
 interface GetWinnerUseCase {
-    fun getWinner(degree: Float, data: List<ParticipantWithArc>): ParticipantWithArc
+    fun invoke(degree: Float, data: List<ParticipantWithArc>): ParticipantWithArc
 }
 
 class GetWinnerUseCaseImpl : GetWinnerUseCase {
     private val ArcModel.endAngle: Float
         get() = startAngle + sweepAngle
 
-    override fun getWinner(degree: Float, data: List<ParticipantWithArc>): ParticipantWithArc {
+    override fun invoke(degree: Float, data: List<ParticipantWithArc>): ParticipantWithArc {
         val degree = (degree) % 360
         return data.first {
             val arc = it.arcModel

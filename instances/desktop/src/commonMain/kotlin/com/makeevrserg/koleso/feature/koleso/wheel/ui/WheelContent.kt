@@ -22,11 +22,10 @@ fun WheelContent(wheelComponent: WheelComponent, participantsComponent: Particip
     val wheelConfiguration by wheelComponent.configuration.collectAsState()
     val participantsModel by participantsComponent.model.collectAsState()
     Column(
-        modifier = Modifier.fillMaxSize().animateContentSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.animateContentSize()
     ) {
-        Text("$wheelConfiguration")
         when (wheelConfiguration) {
             is WheelConfiguration.Pending -> {
                 CircleWithArrow(

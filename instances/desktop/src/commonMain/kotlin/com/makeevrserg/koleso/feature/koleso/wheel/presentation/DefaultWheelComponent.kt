@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class DefaultWheelComponent(
     componentContext: ComponentContext,
-    private val onFinished: (WheelConfiguration.Wheeled) -> Unit
+    private val onFinished: (WheelConfiguration.Wheeled) -> Unit,
+    private val onStarted: ()->Unit
 ) : WheelComponent,
     ComponentContext by componentContext {
     private val getWheelFlowUseCase: GetWheelConfigurationFlowUseCase
@@ -28,6 +29,7 @@ class DefaultWheelComponent(
     private var job: Job? = null
 
     override fun startWheel() {
+        onStarted.invoke()
         coroutineFeature.launch {
             job?.cancelAndJoin()
             job = getWheelFlowUseCase.invoke { configuration.value }
@@ -51,6 +53,7 @@ class DefaultWheelComponent(
     }
 
     override fun reset() {
+        onStarted.invoke()
         configuration.value = WheelConfiguration.Pending(0f)
     }
 }

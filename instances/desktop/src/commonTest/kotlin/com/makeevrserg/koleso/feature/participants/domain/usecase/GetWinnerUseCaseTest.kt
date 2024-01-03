@@ -32,7 +32,7 @@ class GetWinnerUseCaseTest {
         (0..4).forEach {
             val i = it % 4
             val degree = 4f + 90 * it
-            GetWinnerUseCaseImpl().getWinner(degree, data).let { winner ->
+            GetWinnerUseCaseImpl().invoke(degree, data).let { winner ->
                 println("Degree: $degree, winner: $winner")
                 assertEquals(data[4 - i - 1], winner)
             }
@@ -48,7 +48,7 @@ class GetWinnerUseCaseTest {
                 ParticipantModel("Part 2", 5),
             )
         )
-        GetWinnerUseCaseImpl().getWinner(3382f, data).let { winner ->
+        GetWinnerUseCaseImpl().invoke(3382f, data).let { winner ->
             println("Degree: 645.24915f, winner: $winner")
             assertEquals(data[2], winner)
         }

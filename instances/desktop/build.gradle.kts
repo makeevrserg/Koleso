@@ -20,6 +20,7 @@ kotlin {
             dependencies {
                 // Compose
                 implementation(compose.desktop.currentOs)
+                implementation(compose.material3)
                 // Decompose
                 implementation(libs.decompose.core)
                 implementation(libs.decompose.compose.jetbrains)
