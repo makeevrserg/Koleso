@@ -1,6 +1,6 @@
-package com.makeevrserg.koleso.feature.koleso
+package com.makeevrserg.koleso.feature.koleso.wheel.presentation
 
-import com.makeevrserg.koleso.feature.koleso.domain.model.WheelConfiguration
+import com.makeevrserg.koleso.feature.koleso.wheel.domain.model.WheelConfiguration
 import kotlinx.coroutines.flow.StateFlow
 
 interface WheelComponent {

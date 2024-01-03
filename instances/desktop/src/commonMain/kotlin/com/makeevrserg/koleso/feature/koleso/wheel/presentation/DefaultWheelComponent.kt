@@ -1,10 +1,10 @@
-package com.makeevrserg.koleso.feature.koleso
+package com.makeevrserg.koleso.feature.koleso.wheel.presentation
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.instancekeeper.getOrCreate
-import com.makeevrserg.koleso.feature.koleso.domain.model.WheelConfiguration
-import com.makeevrserg.koleso.feature.koleso.domain.usecase.GetWheelConfigurationFlowUseCase
-import com.makeevrserg.koleso.feature.koleso.domain.usecase.GetWheelConfigurationFlowUseCaseImpl
+import com.makeevrserg.koleso.feature.koleso.wheel.domain.model.WheelConfiguration
+import com.makeevrserg.koleso.feature.koleso.wheel.domain.usecase.GetWheelConfigurationFlowUseCase
+import com.makeevrserg.koleso.feature.koleso.wheel.domain.usecase.GetWheelConfigurationFlowUseCaseImpl
 import com.makeevrserg.koleso.service.core.CoroutineFeature
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
@@ -20,7 +20,7 @@ class DefaultWheelComponent(
     ComponentContext by componentContext {
     private val getWheelFlowUseCase: GetWheelConfigurationFlowUseCase
         get() = GetWheelConfigurationFlowUseCaseImpl()
-    override val configuration = MutableStateFlow<WheelConfiguration>(WheelConfiguration.Pending)
+    override val configuration = MutableStateFlow<WheelConfiguration>(WheelConfiguration.Pending(0f))
     private val coroutineFeature = instanceKeeper.getOrCreate {
         CoroutineFeature.Default()
     }
@@ -44,13 +44,13 @@ class DefaultWheelComponent(
 
     override fun stopWheel() {
         configuration.value = when (val currentModel = configuration.value) {
-            WheelConfiguration.Pending -> currentModel
+            is WheelConfiguration.Pending -> currentModel
             is WheelConfiguration.Wheeled -> currentModel
             is WheelConfiguration.Wheeling -> WheelConfiguration.Wheeled(currentModel.degree)
         }
     }
 
     override fun reset() {
-        configuration.value = WheelConfiguration.Pending
+        configuration.value = WheelConfiguration.Pending(0f)
     }
 }

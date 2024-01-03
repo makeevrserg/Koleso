@@ -1,6 +1,8 @@
 package com.makeevrserg.koleso.feature.participants.domain.usecase
 
-import com.makeevrserg.koleso.feature.participants.domain.model.ParticipantModel
+import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantModel
+import com.makeevrserg.koleso.feature.koleso.participants.domain.usecase.CreateParticipantWithArcUseCaseImpl
+import com.makeevrserg.koleso.feature.koleso.participants.domain.usecase.GetWinnerUseCaseImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

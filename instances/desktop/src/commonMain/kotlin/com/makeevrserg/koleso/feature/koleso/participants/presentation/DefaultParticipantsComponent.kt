@@ -1,10 +1,8 @@
-package com.makeevrserg.koleso.feature.participants
+package com.makeevrserg.koleso.feature.koleso.participants.presentation
 
 import com.arkivanov.decompose.ComponentContext
-import com.makeevrserg.koleso.feature.participants.domain.model.ParticipantModel
-import com.makeevrserg.koleso.feature.participants.domain.model.ParticipantWithArc
-import com.makeevrserg.koleso.feature.participants.domain.usecase.CreateParticipantWithArcUseCaseImpl
-import kotlin.random.Random
+import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantModel
+import com.makeevrserg.koleso.feature.koleso.participants.domain.usecase.CreateParticipantWithArcUseCaseImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class DefaultParticipantsComponent(

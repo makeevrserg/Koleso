@@ -1,5 +1,4 @@
-package com.makeevrserg.koleso.feature.participants.domain.model
-
+package com.makeevrserg.koleso.feature.koleso.participants.domain.model
 
 data class ParticipantWithArc(
     val participantModel: ParticipantModel,
