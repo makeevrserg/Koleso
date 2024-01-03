@@ -29,11 +29,14 @@ kotlin {
                 implementation(libs.decompose.compose.jetbrains)
                 // klibs
                 implementation(libs.klibs.kdi)
+                // libres
+                implementation(libs.libres.compose)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
+                implementation(projects.modules.services.resources)
             }
         }
         val commonTest by getting {

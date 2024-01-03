@@ -85,6 +85,7 @@ lint-detekt-ruleset-compose = "0.0.26"
 # Dokka
 dokka = "1.8.10"
 
+libres = "1.2.2"
 [libraries]
 # klibs
 klibs-mikro-core = { module = "ru.astrainteractive.klibs:mikro-core", version.ref = "klibs-mikro" }
@@ -207,6 +208,9 @@ coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 # Okio
 okio = { module = "com.squareup.okio:okio", version.strictly = "3.3.0" }
 
+# Okio
+libres-compose = { module = "io.github.skeptick.libres:libres-compose", version.ref = "libres" }
+
 [plugins]
 # Kotlin
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-version" }
@@ -224,3 +228,4 @@ gradle-buildconfig = { id = "com.github.gmazzo.buildconfig", version.strictly = 
 gradle-ksp = { id = "com.google.devtools.ksp", version.strictly = "1.8.10-1.0.9" }
 gradle-dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin-dokka" }
 gradle-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+gradle-libres = { id = "io.github.skeptick.libres", version.ref = "libres" }
