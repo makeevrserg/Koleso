@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import com.makeevrserg.koleso.feature.koleso.wheel.domain.model.WheelConfiguration
 import com.makeevrserg.koleso.feature.koleso.wheel.presentation.WheelComponent
 import kotlinx.coroutines.flow.distinctUntilChanged
+import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @Composable
 fun WheelExtendedFloatingActionButton(wheelComponent: WheelComponent) {
@@ -36,6 +37,7 @@ fun WheelExtendedFloatingActionButton(wheelComponent: WheelComponent) {
         is WheelConfiguration.Wheeling -> "Stop!"
     }
     ExtendedFloatingActionButton(
+        containerColor = Material3Theme.colorScheme.secondaryContainer,
         modifier = Modifier.animateContentSize(),
         onClick = {
             when (model) {
@@ -45,12 +47,19 @@ fun WheelExtendedFloatingActionButton(wheelComponent: WheelComponent) {
         },
         text = {
             AnimatedContent(text) { text ->
-                Text(text)
+                Text(
+                    text = text,
+                    color = Material3Theme.colorScheme.onSecondaryContainer
+                )
             }
         },
         icon = {
             Crossfade(icon) { icon ->
-                Icon(imageVector = icon, contentDescription = null)
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = Material3Theme.colorScheme.onSecondaryContainer
+                )
             }
         }
     )

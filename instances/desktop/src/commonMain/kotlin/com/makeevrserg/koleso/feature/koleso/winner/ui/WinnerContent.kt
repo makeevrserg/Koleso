@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeevrserg.koleso.feature.koleso.winner.presentation.WinnerComponent
+import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @Composable
 fun WinnerContent(winnerComponent: WinnerComponent) {
@@ -38,7 +39,8 @@ fun WinnerContent(winnerComponent: WinnerComponent) {
                     )
                     Text(
                         text = "✨${model.participantWithArc.participantModel.desc}✨",
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = Material3Theme.colorScheme.onPrimaryContainer
                     )
                     Box(
                         modifier = Modifier.height(4.dp)
@@ -66,11 +68,13 @@ fun WinnerContent(winnerComponent: WinnerComponent) {
                         ) {
                             Text(
                                 text = "✨Winner is ${model.participantWithArc.participantModel.desc}!✨",
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Center,
+                                color = Material3Theme.colorScheme.onPrimaryContainer
                             )
                             Text(
                                 text = "\uD83D\uDE80Total points: ${model.participantWithArc.participantModel.point}!\uD83D\uDE80",
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Center,
+                                color = Material3Theme.colorScheme.onPrimaryContainer
                             )
                         }
                         Box(

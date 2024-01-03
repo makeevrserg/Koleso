@@ -12,10 +12,11 @@ class DefaultParticipantsComponent(
     override val model = MutableStateFlow(ParticipantsComponent.Model())
 
     private fun createParticipants() = listOf(
-        ParticipantModel("Part 0", 1),
-        ParticipantModel("Part 2", 2),
-        ParticipantModel("Part 3", 3),
-        ParticipantModel("Part 4", 4),
+        ParticipantModel("_Pro_Kotleta_", 6),
+        ParticipantModel("AJ3ToMAT", 12),
+        ParticipantModel("apchiska", 8),
+        ParticipantModel("RomaRoman", 3),
+        ParticipantModel("Tombovskiy", 2),
     )
 
     override fun fillData(participants: List<ParticipantModel>) {

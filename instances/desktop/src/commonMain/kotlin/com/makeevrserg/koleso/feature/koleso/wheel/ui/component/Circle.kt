@@ -14,12 +14,13 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantWithArc
+import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @Composable
 fun Circle(
     data: List<ParticipantWithArc>,
     modifier: Modifier,
-    backgroundColor: Color = Color.Black,
+    backgroundColor: Color = Material3Theme.colorScheme.tertiaryContainer,
     outlineWidth: Dp = 8.dp,
     size: Dp
 ) {
@@ -45,7 +46,7 @@ fun Circle(
             drawArc(
                 startAngle = entry.arcModel.startAngle - 90,
                 sweepAngle = entry.arcModel.sweepAngle,
-                color = Color.Black,
+                color = backgroundColor,
                 useCenter = true,
                 topLeft = Offset(outlineWidth.value / 2, outlineWidth.value / 2),
                 size = Size((size - outlineWidth).value, (size - outlineWidth).value),

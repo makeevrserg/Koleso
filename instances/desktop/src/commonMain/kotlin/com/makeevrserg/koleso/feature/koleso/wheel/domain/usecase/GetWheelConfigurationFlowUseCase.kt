@@ -5,6 +5,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlin.math.cosh
+import kotlin.math.sqrt
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -16,8 +17,8 @@ class GetWheelConfigurationFlowUseCaseImpl : GetWheelConfigurationFlowUseCase {
     private val seed = Random.nextInt()
     private val random = Random(seed)
 
-    private val rotationGain = (random.nextInt(40, 45))
-    private val initialPower = random.nextDouble(0.7, 1.4).toFloat()
+    private val rotationGain = (random.nextInt(40, 45)) + random.nextFloat()
+    private val initialPower = random.nextDouble(0.7, 1.4).toFloat() + sqrt(random.nextFloat()/2)
 
     /**
      * Returns current rotation amount by it's [power]
@@ -30,7 +31,7 @@ class GetWheelConfigurationFlowUseCaseImpl : GetWheelConfigurationFlowUseCase {
      * Calculates next power gain
      */
     private fun getNextPower(power: Float): Float {
-//        return power - 0.01f
+        return power - 0.01f
         return when {
             power > 0.3f -> power - 0.001f
             power > 0.2f -> power - 0.0008f

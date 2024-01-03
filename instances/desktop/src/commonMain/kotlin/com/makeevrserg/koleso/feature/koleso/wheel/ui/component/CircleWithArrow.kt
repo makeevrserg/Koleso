@@ -12,10 +12,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.makeevrserg.koleso.feature.koleso.participants.presentation.ParticipantsComponent
 import com.makeevrserg.koleso.feature.koleso.wheel.domain.model.WheelConfiguration
+import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @Composable
 fun CircleWithArrow(
@@ -29,7 +29,7 @@ fun CircleWithArrow(
             imageVector = Icons.Filled.KeyboardArrowDown,
             contentDescription = null,
             modifier = Modifier.size(24.dp),
-            tint = Color.Red
+            tint = Material3Theme.colorScheme.error
         )
         Circle(data = participantsModel.data, modifier = Modifier.rotate(degree), size = 240.dp)
     }

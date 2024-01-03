@@ -3,7 +3,6 @@ package com.makeevrserg.koleso.feature.koleso.root.ui
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -24,16 +23,14 @@ fun KolesoScreen(
             WheelExtendedFloatingActionButton(rootKolesoComponent.wheelComponent)
         }
     ) {
-        Row {
+        Column(
+            modifier = Modifier.fillMaxSize().animateContentSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            WheelContent(rootKolesoComponent.wheelComponent, rootKolesoComponent.participantsComponent)
+            WinnerContent(rootKolesoComponent.winnerComponent)
             ParticipantsContent(rootKolesoComponent.participantsComponent)
-            Column(
-                modifier = Modifier.fillMaxSize().animateContentSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                WheelContent(rootKolesoComponent.wheelComponent, rootKolesoComponent.participantsComponent)
-                WinnerContent(rootKolesoComponent.winnerComponent)
-            }
         }
     }
 }
