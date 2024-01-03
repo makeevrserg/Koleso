@@ -43,5 +43,6 @@ kotlin {
 }
 
 android {
+    apply(plugin = "kotlin-parcelize")
     namespace = "${projectInfo.group}.core.ui"
 }

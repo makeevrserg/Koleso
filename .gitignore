@@ -30,6 +30,7 @@ wearApp/build
 keys.properties
 # iosApp
 instances/desktop/build
+instances/androidApp/build
 # Services
 modules/services/core/build
 modules/services/core-ui/build

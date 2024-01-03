@@ -23,6 +23,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "Koleso"
 // Instances
 include(":instances:desktop")
+include(":instances:androidApp")
 // Services
 include(":modules:services:core")
 include(":modules:services:core-ui")
