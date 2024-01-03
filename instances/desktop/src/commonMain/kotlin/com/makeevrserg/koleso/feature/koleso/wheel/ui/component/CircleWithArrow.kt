@@ -30,6 +30,6 @@ fun CircleWithArrow(
             modifier = Modifier.size(24.dp),
             tint = Color.Red
         )
-        Circle(data = participantsModel.data, modifier = Modifier.size(128.dp).rotate(degree))
+        Circle(data = participantsModel.data, modifier = Modifier.rotate(degree), size = 240.dp)
     }
 }
