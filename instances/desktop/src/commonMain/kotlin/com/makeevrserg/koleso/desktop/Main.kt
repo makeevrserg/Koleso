@@ -1,8 +1,5 @@
 package com.makeevrserg.koleso.desktop
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Tray
 import androidx.compose.ui.window.Window
@@ -14,7 +11,7 @@ import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DefaultDialogCo
 import com.makeevrserg.koleso.feature.koleso.dialog.ui.DialogContent
 import com.makeevrserg.koleso.feature.koleso.root.presentation.DefaultRootKolesoComponent
 import com.makeevrserg.koleso.feature.koleso.root.ui.KolesoScreen
-import androidx.compose.material3.MaterialTheme as Material3Theme
+import com.makeevrserg.koleso.service.theme.CustomTheme
 
 fun main() = application {
     val lifecycle = LifecycleRegistry()
@@ -38,21 +35,16 @@ fun main() = application {
             Item("Close", onClick = ::exitApplication)
         }
     )
+
     Window(
         onCloseRequest = ::exitApplication,
         icon = icon,
         title = "Koleso: EmpireProjekt"
     ) {
-        Material3Theme(
-            colorScheme = darkColorScheme()
-        ) {
-            MaterialTheme(
-                colors = darkColors()
-            ) {
-                KolesoScreen(rootKolesoComponent)
+        CustomTheme {
+            KolesoScreen(rootKolesoComponent)
 
-                DialogContent(dialogComponent)
-            }
+            DialogContent(dialogComponent)
         }
     }
 }

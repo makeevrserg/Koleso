@@ -18,10 +18,6 @@ fun AddParticipantFloatingActionButton(
     onClick: () -> Unit
 ) {
     FloatingActionButton(
-        containerColor = when {
-            isEnabled -> Material3Theme.colorScheme.secondaryContainer
-            else -> Material3Theme.colorScheme.secondaryContainer
-        },
         onClick = {
             if (isEnabled) onClick.invoke()
         },

@@ -20,7 +20,7 @@ import androidx.compose.material3.MaterialTheme as Material3Theme
 fun Circle(
     data: List<ParticipantWithArc>,
     modifier: Modifier,
-    backgroundColor: Color = Material3Theme.colorScheme.tertiaryContainer,
+    backgroundColor: Color = Material3Theme.colorScheme.onTertiary,
     outlineWidth: Dp = 8.dp,
     size: Dp
 ) {

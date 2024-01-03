@@ -37,7 +37,6 @@ fun WheelExtendedFloatingActionButton(wheelComponent: WheelComponent) {
         is WheelConfiguration.Wheeling -> "Stop!"
     }
     ExtendedFloatingActionButton(
-        containerColor = Material3Theme.colorScheme.secondaryContainer,
         modifier = Modifier.animateContentSize(),
         onClick = {
             when (model) {

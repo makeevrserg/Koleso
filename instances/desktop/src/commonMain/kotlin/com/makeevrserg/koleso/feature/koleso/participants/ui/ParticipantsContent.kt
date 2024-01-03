@@ -21,7 +21,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -45,9 +44,6 @@ fun ParticipantContent(entry: ParticipantWithArc, onDeleteClicked: () -> Unit, o
     val participant = entry.participantModel
     Card(
         modifier = Modifier.height(IntrinsicSize.Min),
-        colors = CardDefaults.cardColors(
-            containerColor = Material3Theme.colorScheme.surfaceVariant,
-        ),
         onClick = onEditClicked
     ) {
         Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
