@@ -32,6 +32,11 @@ kotlin {
                 implementation(projects.modules.services.core)
             }
         }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
     }
 }
 
