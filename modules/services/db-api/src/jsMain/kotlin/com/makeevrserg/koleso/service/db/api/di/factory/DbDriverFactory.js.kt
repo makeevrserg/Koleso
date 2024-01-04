@@ -14,10 +14,11 @@ import ru.astrainteractive.klibs.mikro.platform.PlatformConfiguration
 
 actual class DbDriverFactory actual constructor(platformConfiguration: PlatformConfiguration) {
     actual fun create(): Deferred<SqlDriver> = GlobalScope.async {
-        val worker = Worker(js("""new URL("sqlite.worker.js", import.meta.url)""").unsafeCast<String>())
+        val worker = Worker(js("""new URL("@cashapp/sqldelight-sqljs-worker/sqljs.worker.js", import.meta.url)"""))
         val driver: SqlDriver = WebWorkerDriver(worker)
 
         Database.Schema.awaitCreate(driver)
         driver
+
     }
 }

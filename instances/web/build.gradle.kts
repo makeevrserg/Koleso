@@ -73,9 +73,10 @@ kotlin {
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
                 // npm
-                implementation(npm("@sqlite.org/sqlite-wasm", "3.43.2-build1"))
-                implementation(npm("copy-webpack-plugin", "11.0.0"))
-                implementation(npm("@material-ui/icons", "4.11.2"))
+                implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.1"))
+                implementation(npm("sql.js", "1.8.0"))
+                implementation("app.cash.sqldelight:web-worker-driver:2.0.1")
+                implementation(devNpm("copy-webpack-plugin", "9.1.0"))
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
