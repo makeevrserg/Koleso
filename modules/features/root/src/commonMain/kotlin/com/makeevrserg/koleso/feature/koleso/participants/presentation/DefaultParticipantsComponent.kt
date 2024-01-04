@@ -30,8 +30,10 @@ class DefaultParticipantsComponent(
     }
 
     init {
-        participantsApi.participantsFlow
-            .onEach { fillData(it) }
-            .launchIn(coroutineFeature)
+        coroutineFeature.launch {
+            participantsApi.getParticipantsFlow()
+                .onEach { fillData(it) }
+                .launchIn(coroutineFeature)
+        }
     }
 }

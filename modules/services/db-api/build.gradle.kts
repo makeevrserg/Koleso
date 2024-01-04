@@ -23,6 +23,7 @@ kotlin {
             dependencies {
                 // klibs
                 implementation(libs.klibs.mikro.platform)
+                implementation(libs.klibs.mikro.core)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
                 implementation(libs.sqldelight.coroutines.extensions)

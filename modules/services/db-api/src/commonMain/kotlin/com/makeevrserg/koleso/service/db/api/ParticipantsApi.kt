@@ -1,15 +1,17 @@
 package com.makeevrserg.koleso.service.db.api
 
+import app.cash.sqldelight.async.coroutines.awaitAsList
+import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
 import app.cash.sqldelight.coroutines.asFlow
 import com.makeevrserg.koleso.service.db.api.model.ParticipantModel
-import com.makeevrserg.koleso.service.db.api.util.map
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import ru.astrainteractive.klibs.mikro.core.dispatchers.DefaultKotlinDispatchers
 
 interface ParticipantsApi {
-    val participantsFlow: Flow<List<ParticipantModel>>
+    suspend fun getParticipantsFlow(): Flow<List<ParticipantModel>>
 
     suspend fun getParticipants(): List<ParticipantModel>
 
@@ -28,32 +30,31 @@ class ParticipantsApiImpl(private val querriesDeferred: Deferred<PlayerQueries>)
         point = point,
         desc = name,
     )
-    override val participantsFlow: Flow<List<ParticipantModel>> = flow {
-        querriesDeferred.map {
-            it.selectAll().asFlow()
-                .map { it.executeAsList() }
-                .map { it.map { it.toDto() } }
-        }.await().collect { emit(it) }
-    }
 
-    override suspend fun getParticipants(): List<ParticipantModel> {
-        return querriesDeferred.await().selectAll().executeAsList()
+    override suspend fun getParticipantsFlow(): Flow<List<ParticipantModel>> = querriesDeferred.await().selectAll()
+        .asFlow()
+        .map { it.awaitAsList() }
+        .map { it.map { it.toDto() } }
+
+    override suspend fun getParticipants(): List<ParticipantModel> = withContext(DefaultKotlinDispatchers.IO) {
+        querriesDeferred.await().selectAll().awaitAsList()
             .map { it.toDto() }
     }
 
-    override suspend fun addParticipant(name: String, point: Long) {
+    override suspend fun addParticipant(name: String, point: Long) = withContext(DefaultKotlinDispatchers.IO) {
         querriesDeferred.await().upsert(null, point, name)
     }
 
-    override suspend fun removeParticipant(participantModel: ParticipantModel) {
-        querriesDeferred.await().delete(participantModel.id)
-    }
+    override suspend fun removeParticipant(participantModel: ParticipantModel) =
+        withContext(DefaultKotlinDispatchers.IO) {
+            querriesDeferred.await().delete(participantModel.id)
+        }
 
-    override suspend fun update(participantModel: ParticipantModel) {
+    override suspend fun update(participantModel: ParticipantModel) = withContext(DefaultKotlinDispatchers.IO) {
         querriesDeferred.await().update(participantModel.point, participantModel.desc, participantModel.id)
     }
 
-    override suspend fun getParticipantById(id: Long): ParticipantModel? {
-        return querriesDeferred.await().selectById(id).executeAsOneOrNull()?.toDto()
+    override suspend fun getParticipantById(id: Long): ParticipantModel? = withContext(DefaultKotlinDispatchers.IO) {
+        querriesDeferred.await().selectById(id).awaitAsOneOrNull()?.toDto()
     }
 }

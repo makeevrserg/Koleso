@@ -5,13 +5,14 @@ import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.worker.WebWorkerDriver
 import com.makeevrserg.koleso.db.api.Database
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import org.w3c.dom.Worker
 import ru.astrainteractive.klibs.mikro.platform.PlatformConfiguration
 
 actual class DbDriverFactory actual constructor(platformConfiguration: PlatformConfiguration) {
-    actual fun create(): Deferred<SqlDriver> = GlobalScope.async {
+    actual fun create(): Deferred<SqlDriver> = GlobalScope.async(Dispatchers.Default) {
         val worker = Worker(js("""new URL("sqlite.worker.js", import.meta.url)""").unsafeCast<String>())
         val driver: SqlDriver = WebWorkerDriver(worker)
 

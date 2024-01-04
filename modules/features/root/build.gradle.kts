@@ -30,6 +30,7 @@ kotlin {
                 // klibs
                 implementation(libs.klibs.kdi)
                 implementation(libs.klibs.mikro.platform)
+                implementation(libs.klibs.mikro.core)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
                 // Libres
