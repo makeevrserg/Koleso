@@ -5,31 +5,9 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-
-val copyJsResources = tasks.create("copyJsResourcesWorkaround", Copy::class.java) {
-    from(project(":modules:services:resources").file("src/commonMain/resources"))
-    into("build/processedResources/js/main")
-}
-
-
-afterEvaluate {
-    val jsDevelopmentExecutableCompileSync by tasks.getting {
-        dependsOn(copyJsResources)
-        mustRunAfter(copyJsResources)
-    }
-    val jsProcessResources by tasks.getting {
-        finalizedBy(copyJsResources)
-    }
-}
-
 kotlin {
-    js(IR) {
-        moduleName = "web"
-        browser {
-            commonWebpackConfig {
-                outputFileName = "web.js"
-            }
-        }
+    js {
+        browser()
         binaries.executable()
     }
 
