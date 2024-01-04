@@ -6,6 +6,7 @@ import com.makeevrserg.koleso.feature.koleso.participants.domain.usecase.CreateP
 import com.makeevrserg.koleso.service.core.CoroutineFeature
 import com.makeevrserg.koleso.service.db.api.ParticipantsApi
 import com.makeevrserg.koleso.service.db.api.model.ParticipantModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -30,7 +31,7 @@ class DefaultParticipantsComponent(
     }
 
     init {
-        coroutineFeature.launch {
+        coroutineFeature.launch(Dispatchers.Default) {
             participantsApi.getParticipantsFlow()
                 .onEach { fillData(it) }
                 .launchIn(coroutineFeature)

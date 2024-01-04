@@ -5,6 +5,7 @@ import com.arkivanov.essenty.instancekeeper.getOrCreate
 import com.makeevrserg.koleso.service.core.CoroutineFeature
 import com.makeevrserg.koleso.service.db.api.ParticipantsApi
 import com.makeevrserg.koleso.service.db.api.model.ParticipantModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 class DefaultEditParticipantComponent(
     componentContext: ComponentContext,
     private val participantId: Long? = null,
-    private val participantsApi: ParticipantsApi
+    private val participantsApi: ParticipantsApi,
+    private val mainScope: CoroutineScope
 ) : EditParticipantComponent, ComponentContext by componentContext {
     private val coroutineFeature = instanceKeeper.getOrCreate { CoroutineFeature.Default() }
 
@@ -41,7 +43,7 @@ class DefaultEditParticipantComponent(
     }
 
     override fun finishEdit() {
-        coroutineFeature.launch {
+        mainScope.launch {
             if (model.value.name.isEmpty()) return@launch
             if ((model.value.pointsTextField.toIntOrNull() ?: 0) == 0) return@launch
             if (participantId == null) {

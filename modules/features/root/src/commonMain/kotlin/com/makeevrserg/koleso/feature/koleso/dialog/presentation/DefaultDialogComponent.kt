@@ -11,10 +11,12 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.makeevrserg.koleso.feature.koleso.editparticipant.presentation.DefaultEditParticipantComponent
 import com.makeevrserg.koleso.service.db.api.ParticipantsApi
+import kotlinx.coroutines.CoroutineScope
 
 class DefaultDialogComponent(
     componentContext: ComponentContext,
-    private val participantsApi: ParticipantsApi
+    private val participantsApi: ParticipantsApi,
+    private val mainScope: CoroutineScope
 ) : DialogComponent,
     ComponentContext by componentContext {
 
@@ -29,7 +31,8 @@ class DefaultDialogComponent(
                 editParticipantComponent = DefaultEditParticipantComponent(
                     componentContext = childComponentContext,
                     participantId = config.id,
-                    participantsApi = participantsApi
+                    participantsApi = participantsApi,
+                    mainScope = mainScope
                 )
             )
         }

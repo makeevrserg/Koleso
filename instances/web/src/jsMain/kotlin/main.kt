@@ -5,6 +5,7 @@ import androidx.compose.ui.window.CanvasBasedWindow
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.childContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import com.arkivanov.essenty.lifecycle.resume
 import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DefaultDialogComponent
 import com.makeevrserg.koleso.feature.koleso.dialog.ui.DialogContent
 import com.makeevrserg.koleso.feature.koleso.root.presentation.DefaultRootKolesoComponent
@@ -24,7 +25,8 @@ fun main() {
 
         val dialogComponent = DefaultDialogComponent(
             componentContext = rootComponentContext.childContext("dialogComponent"),
-            participantsApi = rootModule.dbApiModule.participantsApi
+            participantsApi = rootModule.dbApiModule.participantsApi,
+            mainScope = rootModule.mainScope
         )
 
         val rootKolesoComponent = DefaultRootKolesoComponent(
@@ -32,7 +34,7 @@ fun main() {
             dialogComponent = dialogComponent,
             participantsApi = rootModule.dbApiModule.participantsApi
         )
-
+        lifecycle.resume()
         CanvasBasedWindow("Koleso") {
             CustomTheme {
                 KolesoScreen(rootKolesoComponent)
