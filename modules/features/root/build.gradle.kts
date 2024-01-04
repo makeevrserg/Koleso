@@ -29,10 +29,10 @@ kotlin {
                 implementation(libs.decompose.compose.jetbrains)
                 // klibs
                 implementation(libs.klibs.kdi)
-                // libres
-                implementation(libs.libres.compose)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
+                // Libres
+                implementation(libs.libres.compose)
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
