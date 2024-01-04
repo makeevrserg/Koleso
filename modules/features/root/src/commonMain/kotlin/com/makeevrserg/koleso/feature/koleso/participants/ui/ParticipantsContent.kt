@@ -14,12 +14,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DialogComponent
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantWithArc
 import com.makeevrserg.koleso.feature.koleso.participants.presentation.ParticipantsComponent
+import com.makeevrserg.koleso.resources.MR
+import io.github.skeptick.libres.compose.painterResource
 import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,9 +50,15 @@ fun ParticipantContent(entry: ParticipantWithArc, onDeleteClicked: () -> Unit, o
             Column(verticalArrangement = Arrangement.spacedBy(4.dp), modifier = Modifier.width(IntrinsicSize.Min)) {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     Icon(
-                        imageVector = Icons.Filled.Face,
+                        painter = when (participant.hashCode() % 4) {
+                            0 -> MR.image.cat_red
+                            1 -> MR.image.cat_black
+                            2 -> MR.image.cat_white
+                            else -> MR.image.cat_calico
+                        }.painterResource(),
                         contentDescription = null,
-                        tint = Material3Theme.colorScheme.onPrimaryContainer
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(24.dp)
                     )
                     Text(
                         text = participant.desc,
@@ -67,9 +72,10 @@ fun ParticipantContent(entry: ParticipantWithArc, onDeleteClicked: () -> Unit, o
                 ) {
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         Icon(
-                            imageVector = Icons.Filled.Star,
+                            painter = MR.image.img_gold.painterResource(),
                             contentDescription = null,
-                            tint = Material3Theme.colorScheme.onPrimaryContainer
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(24.dp)
                         )
                         Text(
                             text = "${participant.point}",
@@ -78,10 +84,10 @@ fun ParticipantContent(entry: ParticipantWithArc, onDeleteClicked: () -> Unit, o
                         )
                     }
                     Icon(
-                        imageVector = Icons.Filled.Delete,
+                        painter = MR.image.img_lava_bucket.painterResource(),
                         contentDescription = null,
-                        tint = Material3Theme.colorScheme.error,
-                        modifier = Modifier.clip(CircleShape).clickable {
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(24.dp).clip(CircleShape).clickable {
                             onDeleteClicked.invoke()
                         }
                     )

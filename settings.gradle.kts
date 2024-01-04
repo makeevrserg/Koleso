@@ -28,5 +28,6 @@ include(":instances:web")
 // Services
 include(":modules:services:core")
 include(":modules:services:core-ui")
+include(":modules:services:resources")
 // Features
 include(":modules:features:root")

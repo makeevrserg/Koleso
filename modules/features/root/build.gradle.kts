@@ -31,9 +31,12 @@ kotlin {
                 implementation(libs.klibs.kdi)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
+                // Libres
+                implementation(libs.libres.compose)
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
+                implementation(projects.modules.services.resources)
             }
         }
         val commonTest by getting {

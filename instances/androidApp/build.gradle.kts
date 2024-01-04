@@ -130,4 +130,5 @@ dependencies {
     // Local
     implementation(projects.modules.features.root)
     implementation(projects.modules.services.coreUi)
+    implementation(projects.modules.services.resources)
 }
