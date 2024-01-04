@@ -26,6 +26,7 @@ kotlin {
                 implementation(libs.decompose.compose.jetbrains)
                 // klibs
                 implementation(libs.klibs.kdi)
+                implementation(libs.klibs.mikro.platform)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
                 implementation(libs.kotlin.coroutines.swing)
@@ -34,6 +35,7 @@ kotlin {
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
                 implementation(projects.modules.features.root)
+                implementation(projects.modules.services.dbApi)
             }
         }
         val commonTest by getting {

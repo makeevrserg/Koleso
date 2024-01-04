@@ -11,20 +11,26 @@ import com.makeevrserg.koleso.feature.koleso.root.presentation.DefaultRootKoleso
 import com.makeevrserg.koleso.feature.koleso.root.ui.KolesoScreen
 import com.makeevrserg.koleso.service.core.ui.theme.CustomTheme
 import org.jetbrains.skiko.wasm.onWasmReady
+import ru.astrainteractive.klibs.mikro.platform.DefaultJSPlatformConfiguration
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     onWasmReady {
+        val rootModule = com.makeevrserg.koleso.feature.root.di.RootModule.Default().apply {
+            platformConfiguration.initialize { DefaultJSPlatformConfiguration() }
+        }
         val lifecycle = LifecycleRegistry()
         val rootComponentContext = DefaultComponentContext(lifecycle)
 
         val dialogComponent = DefaultDialogComponent(
-            componentContext = rootComponentContext.childContext("dialogComponent")
+            componentContext = rootComponentContext.childContext("dialogComponent"),
+            participantsApi = rootModule.dbApiModule.participantsApi
         )
 
         val rootKolesoComponent = DefaultRootKolesoComponent(
             componentContext = rootComponentContext,
             dialogComponent = dialogComponent,
+            participantsApi = rootModule.dbApiModule.participantsApi
         )
 
         CanvasBasedWindow("Koleso") {

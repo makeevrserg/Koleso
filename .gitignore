@@ -39,5 +39,6 @@ instances/web/webpack.config.d
 modules/services/core/build
 modules/services/core-ui/build
 modules/services/resources/build
+modules/services/db-api/build
 # Features ----------------------------------
 modules/features/root/build

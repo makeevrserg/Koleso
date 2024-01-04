@@ -15,6 +15,7 @@ plugins {
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.gradle.buildconfig) apply false
     alias(libs.plugins.gradle.libres) apply false
+    alias(libs.plugins.gradle.sqldelight) apply false
 }
 apply(plugin = "ru.astrainteractive.gradleplugin.detekt")
 
