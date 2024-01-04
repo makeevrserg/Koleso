@@ -33,7 +33,9 @@ import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DialogComponent
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantWithArc
 import com.makeevrserg.koleso.feature.koleso.participants.presentation.ParticipantsComponent
 import com.makeevrserg.koleso.resources.MR
+import com.makeevrserg.koleso.service.resources.CatImagesExt.catImages
 import io.github.skeptick.libres.compose.painterResource
+import kotlin.math.absoluteValue
 import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,13 +51,10 @@ fun ParticipantContent(entry: ParticipantWithArc, onDeleteClicked: () -> Unit, o
             Box(Modifier.fillMaxHeight().width(8.dp).clip(CircleShape).background(Color(arc.argbColor)))
             Column(verticalArrangement = Arrangement.spacedBy(4.dp), modifier = Modifier.width(IntrinsicSize.Min)) {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    val catImages = MR.catImages
+                    val i = participant.hashCode().absoluteValue % catImages.size
                     Icon(
-                        painter = when (participant.hashCode() % 4) {
-                            0 -> MR.image.cat_red
-                            1 -> MR.image.cat_black
-                            2 -> MR.image.cat_white
-                            else -> MR.image.cat_calico
-                        }.painterResource(),
+                        painter = catImages[i].painterResource(),
                         contentDescription = null,
                         tint = Color.Unspecified,
                         modifier = Modifier.size(24.dp)
