@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.compose")
 }
 val copyJsResources = tasks.create("copyJsResourcesWorkaround", Copy::class.java) {
-    from( projects.modules.services.resources.dependencyProject.file("build/generated/libres/js/resources"))
+    from(projects.modules.services.resources.dependencyProject.file("build/generated/libres/js/resources"))
     into("build/processedResources/js/main")
 }
 
@@ -36,7 +36,6 @@ kotlin {
         }
         binaries.executable()
     }
-
 
     sourceSets {
         all {
