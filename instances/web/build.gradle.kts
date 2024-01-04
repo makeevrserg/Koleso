@@ -25,6 +25,13 @@ afterEvaluate {
         finalizedBy(copyJsResources)
     }
 
+    val jsProductionExecutableCompileSync by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+    val jsBrowserProductionExecutableDistributeResources by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+
     projects.modules.services.resources.dependencyProject.tasks.getByName("libresGenerateImages") {
         finalizedBy(copyJsResources)
     }
