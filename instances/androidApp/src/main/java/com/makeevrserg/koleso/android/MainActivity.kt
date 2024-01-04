@@ -35,7 +35,8 @@ class MainActivity : ComponentActivity() {
 
         val dialogComponent = DefaultDialogComponent(
             componentContext = rootComponentContext.childContext("dialogComponent"),
-            participantsApi = rootModule.dbApiModule.participantsApi
+            participantsApi = rootModule.dbApiModule.participantsApi,
+            mainScope = rootModule.mainScope
         )
 
         val rootKolesoComponent = DefaultRootKolesoComponent(
