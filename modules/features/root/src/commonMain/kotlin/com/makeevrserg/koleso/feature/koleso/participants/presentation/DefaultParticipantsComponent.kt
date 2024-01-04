@@ -32,7 +32,7 @@ class DefaultParticipantsComponent(
 
     init {
         coroutineFeature.launch(Dispatchers.Default) {
-            participantsApi.getParticipantsFlow()
+            participantsApi.participantsFlow
                 .onEach { fillData(it) }
                 .launchIn(coroutineFeature)
         }

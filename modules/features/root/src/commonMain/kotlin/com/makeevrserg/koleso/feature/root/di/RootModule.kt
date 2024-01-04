@@ -17,7 +17,7 @@ interface RootModule {
         override val mainScope: CoroutineScope = CoroutineFeature.Default()
 
         override val dbApiModule: DbApiModule by lazy {
-            DbApiModule.Default(platformConfiguration.value, mainScope)
+            DbApiModule.Default(platformConfiguration.value)
         }
     }
 }

@@ -1,3 +1,5 @@
+@file:Suppress("MatchingDeclarationName")
+
 package com.makeevrserg.koleso.service.db.api.di.factory
 
 import app.cash.sqldelight.async.coroutines.awaitCreate
