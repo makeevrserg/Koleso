@@ -2,6 +2,7 @@ package com.makeevrserg.koleso.feature.koleso.wheel.ui
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -14,7 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.makeevrserg.koleso.feature.koleso.participants.presentation.ParticipantsComponent
 import com.makeevrserg.koleso.feature.koleso.participants.ui.component.AddParticipantFloatingActionButton
-import com.makeevrserg.koleso.feature.koleso.wheel.domain.model.WheelConfiguration
 import com.makeevrserg.koleso.feature.koleso.wheel.presentation.WheelComponent
 import com.makeevrserg.koleso.feature.koleso.wheel.ui.component.CircleWithArrow
 
@@ -22,33 +22,14 @@ import com.makeevrserg.koleso.feature.koleso.wheel.ui.component.CircleWithArrow
 fun WheelContent(wheelComponent: WheelComponent, participantsComponent: ParticipantsComponent) {
     val wheelConfiguration by wheelComponent.configuration.collectAsState()
     val participantsModel by participantsComponent.model.collectAsState()
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Box(
+        contentAlignment = Alignment.Center,
         modifier = Modifier.animateContentSize()
     ) {
-        when (wheelConfiguration) {
-            is WheelConfiguration.Pending -> {
-                CircleWithArrow(
-                    wheelConfiguration = wheelConfiguration,
-                    participantsModel = participantsModel
-                )
-            }
-
-            is WheelConfiguration.Wheeled -> {
-                CircleWithArrow(
-                    wheelConfiguration = wheelConfiguration,
-                    participantsModel = participantsModel
-                )
-            }
-
-            is WheelConfiguration.Wheeling -> {
-                CircleWithArrow(
-                    wheelConfiguration = wheelConfiguration,
-                    participantsModel = participantsModel
-                )
-            }
-        }
+        CircleWithArrow(
+            wheelConfiguration = wheelConfiguration,
+            participantsModel = participantsModel
+        )
     }
 }
 
