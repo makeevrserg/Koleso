@@ -72,11 +72,6 @@ kotlin {
                 implementation(libs.klibs.mikro.platform)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
-                // npm
-                implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.1"))
-                implementation(npm("sql.js", "1.8.0"))
-                implementation("app.cash.sqldelight:web-worker-driver:2.0.1")
-                implementation(devNpm("copy-webpack-plugin", "9.1.0"))
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)

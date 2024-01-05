@@ -9,6 +9,7 @@ plugins {
     id("ru.astrainteractive.gradleplugin.java.core")
     id("ru.astrainteractive.gradleplugin.android.core")
     alias(libs.plugins.gradle.sqldelight)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -21,9 +22,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                // kotlin
+                implementation(libs.kotlin.serialization.json)
                 // klibs
                 implementation(libs.klibs.mikro.platform)
                 implementation(libs.klibs.mikro.core)
+                implementation(libs.klibs.kstorage)
+                // settings
+                implementation(libs.mppsettings)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
                 implementation(libs.sqldelight.coroutines.extensions)
@@ -37,11 +43,6 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(libs.sqldelight.driver.sqlite)
-            }
-        }
-        val jsMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.driver.webworker)
             }
         }
     }

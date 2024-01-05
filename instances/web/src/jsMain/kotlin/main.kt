@@ -17,14 +17,6 @@ import ru.astrainteractive.klibs.mikro.platform.DefaultJSPlatformConfiguration
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     onWasmReady {
-        js("""
-    window.originalFetch = window.fetch;
-    window.fetch = function (resource, init) {
-        init = Object.assign({}, init);
-        init.credentials = init.credentials !== undefined ? init.credentials : 'include';
-        return window.originalFetch(resource, init);
-    };
-""")
         val rootModule = com.makeevrserg.koleso.feature.root.di.RootModule.Default().apply {
             platformConfiguration.initialize { DefaultJSPlatformConfiguration() }
         }
