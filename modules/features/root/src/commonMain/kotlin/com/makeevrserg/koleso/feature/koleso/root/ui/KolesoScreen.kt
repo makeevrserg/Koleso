@@ -32,20 +32,18 @@ fun KolesoScreen(
     val participantsModel by rootKolesoComponent.participantsComponent.model.collectAsState()
     Scaffold(
         floatingActionButton = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Bottom),
-                modifier = Modifier.fillMaxSize().animateContentSize(),
-                horizontalAlignment = Alignment.End,
-            ) {
-                AnimatedVisibility(participantsModel.hasAnyParticipant, enter = fadeIn(), exit = fadeOut()) {
+            AnimatedVisibility(participantsModel.hasEnoughParticipants, enter = fadeIn(), exit = fadeOut()) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Bottom),
+                    modifier = Modifier.fillMaxSize().animateContentSize(),
+                    horizontalAlignment = Alignment.End,
+                ) {
                     AddParticipantFloatingActionButton(
                         wheelComponent = rootKolesoComponent.wheelComponent,
                         onClick = {
                             rootKolesoComponent.dialogComponent.openEditParticipant()
                         }
                     )
-                }
-                AnimatedVisibility(participantsModel.hasEnoughParticipants, enter = fadeIn(), exit = fadeOut()) {
                     WheelExtendedFloatingActionButton(wheelComponent = rootKolesoComponent.wheelComponent)
                 }
             }
