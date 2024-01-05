@@ -27,6 +27,36 @@ import com.makeevrserg.koleso.feature.koleso.editparticipant.presentation.EditPa
 import androidx.compose.material3.MaterialTheme as Material3Theme
 
 @Composable
+private fun EditParticipantButtons(
+    model: EditParticipantComponent.Model,
+    onComplete: () -> Unit,
+    onClose: () -> Unit
+) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+        TextButton(
+            enabled = model.isSaveEnabled,
+            onClick = onComplete,
+        ) {
+            Text(
+                text = "Complete",
+                style = Material3Theme.typography.titleMedium,
+                color = when (model.isSaveEnabled) {
+                    true -> Material3Theme.colorScheme.tertiary
+                    false -> Material3Theme.colorScheme.tertiary.copy(0.5f)
+                }
+            )
+        }
+        TextButton(onClick = onClose) {
+            Text(
+                text = "Cancel",
+                style = Material3Theme.typography.titleMedium,
+                color = Material3Theme.colorScheme.error
+            )
+        }
+    }
+}
+
+@Composable
 fun EditParticipantContent(
     editParticipantComponent: EditParticipantComponent,
     onClose: () -> Unit
@@ -43,19 +73,27 @@ fun EditParticipantContent(
     }
     Column(
         modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(16.dp),
-        verticalArrangement = Arrangement.Top,
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.Start
     ) {
         Text(
-            text = "Participant name:",
-            style = Material3Theme.typography.titleMedium,
-            color = Material3Theme.colorScheme.onSecondaryContainer
+            text = "Edit participant",
+            style = Material3Theme.typography.titleLarge,
+            color = Material3Theme.colorScheme.onSecondaryContainer,
+            modifier = Modifier.padding(bottom = 8.dp)
         )
         OutlinedTextField(
             value = model.name,
             onValueChange = editParticipantComponent::changeName,
             textStyle = Material3Theme.typography.bodyMedium,
             modifier = Modifier.fillMaxWidth().focusRequester(nameFocusRequester),
+            label = {
+                Text(
+                    text = "Participant name:",
+                    style = Material3Theme.typography.titleMedium,
+                    color = Material3Theme.colorScheme.onSecondaryContainer
+                )
+            },
             keyboardActions = KeyboardActions(
                 onNext = { requestPointsFocus.invoke() },
             ),
@@ -65,16 +103,18 @@ fun EditParticipantContent(
 
         )
 
-        Text(
-            text = "Participant points:",
-            style = Material3Theme.typography.titleMedium,
-            color = Material3Theme.colorScheme.onSecondaryContainer
-        )
         OutlinedTextField(
             value = model.pointsTextField,
             onValueChange = editParticipantComponent::changePoints,
             textStyle = Material3Theme.typography.bodyMedium,
             modifier = Modifier.fillMaxWidth().focusRequester(pointsFocusRequester),
+            label = {
+                Text(
+                    text = "Participant name:",
+                    style = Material3Theme.typography.titleMedium,
+                    color = Material3Theme.colorScheme.onSecondaryContainer
+                )
+            },
             keyboardActions = KeyboardActions(
                 onDone = {
                     editParticipantComponent.finishEdit()
@@ -86,24 +126,14 @@ fun EditParticipantContent(
                 imeAction = ImeAction.Done
             )
         )
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-            TextButton(onClick = {
+
+        EditParticipantButtons(
+            model = model,
+            onClose = onClose,
+            onComplete = {
                 editParticipantComponent.finishEdit()
                 onClose.invoke()
-            }) {
-                Text(
-                    text = "Complete",
-                    style = Material3Theme.typography.titleMedium,
-                    color = Material3Theme.colorScheme.tertiary
-                )
             }
-            TextButton(onClick = onClose) {
-                Text(
-                    text = "Cancel",
-                    style = Material3Theme.typography.titleMedium,
-                    color = Material3Theme.colorScheme.error
-                )
-            }
-        }
+        )
     }
 }

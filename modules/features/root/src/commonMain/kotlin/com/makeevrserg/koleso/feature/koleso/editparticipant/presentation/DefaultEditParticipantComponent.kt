@@ -45,18 +45,18 @@ class DefaultEditParticipantComponent(
     override fun finishEdit() {
         mainScope.launch {
             if (model.value.name.isEmpty()) return@launch
-            if ((model.value.pointsTextField.toIntOrNull() ?: 0) == 0) return@launch
+            if ((model.value.pointsLong) <= 0) return@launch
             if (participantId == null) {
                 participantsApi.addParticipant(
                     name = model.value.name,
-                    point = model.value.pointsTextField.toLongOrNull() ?: 0
+                    point = model.value.pointsLong
                 )
             } else {
                 participantsApi.update(
                     ParticipantModel(
                         participantId,
                         model.value.name,
-                        model.value.pointsTextField?.toLongOrNull() ?: 0
+                        model.value.pointsLong
                     )
                 )
             }
