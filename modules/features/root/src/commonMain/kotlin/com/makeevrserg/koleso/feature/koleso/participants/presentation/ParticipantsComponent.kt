@@ -9,5 +9,8 @@ interface ParticipantsComponent {
 
     fun removeParticipant(participantModel: ParticipantModel)
 
-    class Model(val data: List<ParticipantWithArc> = emptyList())
+    class Model(val data: List<ParticipantWithArc> = emptyList()) {
+        val hasAnyParticipant = data.isNotEmpty()
+        val hasEnoughParticipants = data.size > 1
+    }
 }
