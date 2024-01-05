@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS Participant (
+  id INTEGER PRIMARY KEY NOT NULL,
+  point INTEGER NOT NULL,
+  name TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM Participant;
+
+selectById:
+SELECT * FROM Participant WHERE id=?;
+
+upsert:
+INSERT INTO Participant(id, point, name) VALUES (?, ?, ?);
+
+update:
+UPDATE Participant SET point = ?, name= ? WHERE id = ?;
+
+delete:
+DELETE FROM Participant WHERE id=?;
+
+deleteAll:
+DELETE FROM Participant;

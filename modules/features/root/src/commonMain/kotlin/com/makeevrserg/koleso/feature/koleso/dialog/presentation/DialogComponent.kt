@@ -7,7 +7,7 @@ import com.makeevrserg.koleso.feature.koleso.editparticipant.presentation.EditPa
 interface DialogComponent {
     val slot: Value<ChildSlot<*, Child>>
 
-    fun openEditParticipant(id: String? = null)
+    fun openEditParticipant(id: Long? = null)
     fun dismiss()
 
     sealed interface Child {

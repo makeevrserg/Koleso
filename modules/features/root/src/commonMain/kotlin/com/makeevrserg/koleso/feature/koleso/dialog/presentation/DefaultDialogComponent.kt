@@ -10,9 +10,13 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.makeevrserg.koleso.feature.koleso.editparticipant.presentation.DefaultEditParticipantComponent
+import com.makeevrserg.koleso.service.db.api.ParticipantsApi
+import kotlinx.coroutines.CoroutineScope
 
 class DefaultDialogComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    private val participantsApi: ParticipantsApi,
+    private val mainScope: CoroutineScope
 ) : DialogComponent,
     ComponentContext by componentContext {
 
@@ -26,27 +30,26 @@ class DefaultDialogComponent(
             is Configuration.EditParticipant -> DialogComponent.Child.EditParticipant(
                 editParticipantComponent = DefaultEditParticipantComponent(
                     componentContext = childComponentContext,
-                    participantId = config.id.orEmpty()
+                    participantId = config.id,
+                    participantsApi = participantsApi,
+                    mainScope = mainScope
                 )
             )
         }
-    }
-
-    override fun openEditParticipant(id: String?) {
-        slotNavigation.activate(
-            Configuration.EditParticipant(
-                id
-            )
-        )
     }
 
     override fun dismiss() {
         slotNavigation.dismiss()
     }
 
+    override fun openEditParticipant(id: Long?) {
+        slotNavigation.activate(
+            Configuration.EditParticipant(id)
+        )
+    }
+
     private sealed interface Configuration : Parcelable {
         @Parcelize
-        class EditParticipant(val id: String? = null) :
-            Configuration
+        class EditParticipant(val id: Long? = null) : Configuration
     }
 }

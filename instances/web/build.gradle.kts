@@ -21,20 +21,32 @@ afterEvaluate {
         finalizedBy(copyJsResources)
     }
 
+    val jsBrowserDevelopmentExecutableDistributeResources by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+
+    val jsProductionExecutableCompileSync by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+    val jsBrowserProductionExecutableDistributeResources by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+
     projects.modules.services.resources.dependencyProject.tasks.getByName("libresGenerateImages") {
         finalizedBy(copyJsResources)
     }
 }
 
 kotlin {
-    js(IR) {
+    js {
         moduleName = "web"
         browser {
+            useCommonJs()
             commonWebpackConfig {
                 outputFileName = "web.js"
             }
+            binaries.executable()
         }
-        binaries.executable()
     }
 
     sourceSets {
@@ -57,12 +69,14 @@ kotlin {
                 implementation(libs.decompose.compose.jetbrains)
                 // klibs
                 implementation(libs.klibs.kdi)
+                implementation(libs.klibs.mikro.platform)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
                 implementation(projects.modules.features.root)
+                implementation(projects.modules.services.dbApi)
             }
         }
 

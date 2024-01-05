@@ -9,13 +9,16 @@ import com.makeevrserg.koleso.feature.koleso.wheel.presentation.DefaultWheelComp
 import com.makeevrserg.koleso.feature.koleso.wheel.presentation.WheelComponent
 import com.makeevrserg.koleso.feature.koleso.winner.presentation.DefaultWinnerComponent
 import com.makeevrserg.koleso.feature.koleso.winner.presentation.WinnerComponent
+import com.makeevrserg.koleso.service.db.api.ParticipantsApi
 
 class DefaultRootKolesoComponent(
     componentContext: ComponentContext,
-    override val dialogComponent: DialogComponent
+    override val dialogComponent: DialogComponent,
+    private val participantsApi: ParticipantsApi
 ) : RootKolesoComponent, ComponentContext by componentContext {
     override val participantsComponent: ParticipantsComponent = DefaultParticipantsComponent(
-        componentContext = childContext("ParticipantsComponent")
+        componentContext = childContext("ParticipantsComponent"),
+        participantsApi = participantsApi
     )
     override val winnerComponent: WinnerComponent = DefaultWinnerComponent(
         componentContext = childContext("winnerComponent")

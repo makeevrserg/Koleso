@@ -34,10 +34,10 @@ instances/desktop/build
 instances/androidApp/build
 instances/androidApp/keystore.jks
 instances/web/build
-instances/web/webpack.config.d
 # Services
 modules/services/core/build
 modules/services/core-ui/build
 modules/services/resources/build
+modules/services/db-api/build
 # Features ----------------------------------
 modules/features/root/build

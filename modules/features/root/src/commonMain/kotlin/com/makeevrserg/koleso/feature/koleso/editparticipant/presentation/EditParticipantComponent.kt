@@ -5,8 +5,6 @@ import kotlinx.coroutines.flow.StateFlow
 interface EditParticipantComponent {
     val model: StateFlow<Model>
 
-    fun delete()
-
     fun changeName(name: String)
 
     fun changePoints(points: String)
@@ -15,7 +13,7 @@ interface EditParticipantComponent {
 
     data class Model(
         val name: String = "",
-        val pointsTextField: String = "0"
+        val pointsTextField: String = "1"
     ) {
         val isPointsValid = pointsTextField.toIntOrNull() != null
     }

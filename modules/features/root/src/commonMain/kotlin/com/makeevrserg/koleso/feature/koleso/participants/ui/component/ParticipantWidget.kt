@@ -28,7 +28,6 @@ import com.makeevrserg.koleso.feature.koleso.participants.domain.model.Participa
 import com.makeevrserg.koleso.resources.MR
 import com.makeevrserg.koleso.service.resources.CatImagesExt.catImages
 import io.github.skeptick.libres.compose.painterResource
-import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +47,7 @@ fun ParticipantWidget(
             Column(verticalArrangement = Arrangement.spacedBy(4.dp), modifier = Modifier.width(IntrinsicSize.Min)) {
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     val catImages = MR.catImages
-                    val i = participant.hashCode().absoluteValue % catImages.size
+                    val i = participant.id.hashCode() % catImages.size
                     Icon(
                         painter = catImages[i].painterResource(),
                         contentDescription = null,

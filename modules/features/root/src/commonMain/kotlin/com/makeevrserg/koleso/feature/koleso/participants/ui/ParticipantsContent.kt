@@ -44,7 +44,7 @@ fun ParticipantsContent(
                 ParticipantWidget(
                     entry = entry,
                     onEditClicked = {
-                        dialogComponent.openEditParticipant(entry.participantModel.desc)
+                        dialogComponent.openEditParticipant(entry.participantModel.id)
                     },
                     onDeleteClicked = {
                         participantsComponent.removeParticipant(entry.participantModel)

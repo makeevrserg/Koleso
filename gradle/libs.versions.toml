@@ -1,6 +1,6 @@
 [versions]
 # Kotlin
-kotlin-version = "1.9.20"
+kotlin-version = "1.9.21"
 kotlin-dokka = "1.8.10"
 kotlin-coroutines = "1.7.2"
 kotlin-android-application = "8.0.1"
@@ -50,11 +50,11 @@ coil = "2.2.2"
 
 # klibs
 klibs-mikro = "1.0.0"
-klibs-kstorage = "1.0.0"
+klibs-kstorage = "1.3.0"
 klibs-kdi = "1.1.0"
 
 # Compose
-kotlin-compose = "1.5.10"
+kotlin-compose = "1.5.11"
 
 # Moko
 moko-mvvm = "0.16.1"
@@ -86,6 +86,8 @@ lint-detekt-ruleset-compose = "0.0.26"
 dokka = "1.8.10"
 
 libres = "1.2.2"
+
+sqldelight = "2.0.1"
 [libraries]
 # klibs
 klibs-mikro-core = { module = "ru.astrainteractive.klibs:mikro-core", version.ref = "klibs-mikro" }
@@ -208,8 +210,15 @@ coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 # Okio
 okio = { module = "com.squareup.okio:okio", version.strictly = "3.3.0" }
 
-# Okio
+# Libres
 libres-compose = { module = "io.github.skeptick.libres:libres-compose", version.ref = "libres" }
+
+# sqldelight
+sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqldelight-driver-webworker = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqldelight" }
+sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 
 [plugins]
 # Kotlin
@@ -229,3 +238,4 @@ gradle-ksp = { id = "com.google.devtools.ksp", version.strictly = "1.8.10-1.0.9"
 gradle-dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin-dokka" }
 gradle-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 gradle-libres = { id = "io.github.skeptick.libres", version.ref = "libres" }
+gradle-sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

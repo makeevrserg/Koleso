@@ -21,6 +21,9 @@ kotlin {
 
 android {
     namespace = "${projectInfo.group}.resources"
+    sourceSets {
+        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
+    }
 }
 
 libres {
