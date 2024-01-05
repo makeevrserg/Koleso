@@ -15,6 +15,7 @@ interface EditParticipantComponent {
         val name: String = "",
         val pointsTextField: String = "1"
     ) {
-        val isPointsValid = pointsTextField.toIntOrNull() != null
+        val pointsLong = pointsTextField.toLongOrNull() ?: 0L
+        val isSaveEnabled = pointsLong > 0 && name.isNotBlank()
     }
 }
