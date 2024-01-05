@@ -20,6 +20,7 @@ import com.makeevrserg.koleso.feature.koleso.participants.ui.ParticipantsContent
 import com.makeevrserg.koleso.feature.koleso.participants.ui.component.AddParticipantFloatingActionButton
 import com.makeevrserg.koleso.feature.koleso.root.presentation.DefaultRootKolesoComponent
 import com.makeevrserg.koleso.feature.koleso.wheel.ui.EmptyWheelContent
+import com.makeevrserg.koleso.feature.koleso.wheel.ui.NotEnoughForWheelContent
 import com.makeevrserg.koleso.feature.koleso.wheel.ui.WheelContent
 import com.makeevrserg.koleso.feature.koleso.wheel.ui.component.WheelExtendedFloatingActionButton
 import com.makeevrserg.koleso.feature.koleso.winner.ui.WinnerContent
@@ -50,11 +51,25 @@ fun KolesoScreen(
             }
         },
     ) {
-        Crossfade(participantsModel.hasAnyParticipant) { hasAnyParticipant ->
+        Crossfade(participantsModel) { participantsModel ->
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 when {
-                    !hasAnyParticipant -> {
+                    !participantsModel.hasAnyParticipant -> {
                         EmptyWheelContent(rootKolesoComponent.dialogComponent::openEditParticipant)
+                    }
+
+                    !participantsModel.hasEnoughParticipants -> {
+                        Column(
+                            modifier = Modifier.fillMaxSize().animateContentSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            NotEnoughForWheelContent(rootKolesoComponent.dialogComponent::openEditParticipant)
+                            ParticipantsContent(
+                                rootKolesoComponent.participantsComponent,
+                                rootKolesoComponent.dialogComponent
+                            )
+                        }
                     }
 
                     else -> {

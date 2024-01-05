@@ -67,3 +67,19 @@ fun EmptyWheelContent(onClick: () -> Unit) {
         AddParticipantFloatingActionButton(isEnabled = true, onClick = onClick)
     }
 }
+
+@Composable
+fun NotEnoughForWheelContent(onClick: () -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
+    ) {
+        Text(
+            text = "Add one more participant!",
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center
+        )
+        AddParticipantFloatingActionButton(isEnabled = true, onClick = onClick)
+    }
+}
