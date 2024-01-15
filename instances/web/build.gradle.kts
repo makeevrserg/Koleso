@@ -9,6 +9,52 @@ plugins {
     id("dev.icerock.mobile.multiplatform-resources")
 }
 
+val copyJsResources = tasks.create("copyJsResourcesWorkaround", Copy::class.java) {
+    from(projects.modules.services.resources.dependencyProject.file("build/generated/moko-resources/jsMain/res"))
+    into("build/js/packages/web/kotlin")
+    into(rootProject.file("build/js/packages/web/kotlin"))
+}
+
+project.evaluationDependsOn(projects.modules.services.resources.dependencyProject.path)
+
+afterEvaluate {
+    val jsDevelopmentExecutableCompileSync by tasks.getting {
+        dependsOn(copyJsResources)
+        mustRunAfter(copyJsResources)
+    }
+
+    val jsProcessResources by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+
+    val jsBrowserDevelopmentExecutableDistributeResources by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+
+    val jsProductionExecutableCompileSync by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+
+    val jsBrowserProductionExecutableDistributeResources by tasks.getting {
+        finalizedBy(copyJsResources)
+    }
+
+    val jsBrowserProductionWebpack by tasks.getting {
+        dependsOn(copyJsResources)
+        mustRunAfter(copyJsResources)
+    }
+
+    val jsBrowserDevelopmentWebpack by tasks.getting {
+        dependsOn(copyJsResources)
+        mustRunAfter(copyJsResources)
+    }
+
+    projects.modules.services.resources.dependencyProject.tasks.getByName("generateMRjsMain") {
+        copyJsResources.dependsOn(this)
+        copyJsResources.mustRunAfter(this)
+    }
+}
+
 kotlin {
     js(IR) {
         moduleName = "web"
