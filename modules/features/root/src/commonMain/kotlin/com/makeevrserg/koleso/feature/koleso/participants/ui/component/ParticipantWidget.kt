@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.makeevrserg.koleso.feature.koleso.participants.domain.model.ParticipantWithArc
 import com.makeevrserg.koleso.resources.MR
 import com.makeevrserg.koleso.service.resources.CatImagesExt.catImages
-import io.github.skeptick.libres.compose.painterResource
+import dev.icerock.moko.resources.compose.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +49,7 @@ fun ParticipantWidget(
                     val catImages = MR.catImages
                     val i = participant.id.hashCode() % catImages.size
                     Icon(
-                        painter = catImages[i].painterResource(),
+                        painter = painterResource(catImages[i]),
                         contentDescription = null,
                         tint = Color.Unspecified,
                         modifier = Modifier.size(24.dp)
@@ -66,7 +66,7 @@ fun ParticipantWidget(
                 ) {
                     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         Icon(
-                            painter = MR.image.img_gold.painterResource(),
+                            painter = painterResource(MR.images.img_gold),
                             contentDescription = null,
                             tint = Color.Unspecified,
                             modifier = Modifier.size(24.dp)
@@ -78,7 +78,7 @@ fun ParticipantWidget(
                         )
                     }
                     Icon(
-                        painter = MR.image.img_lava_bucket.painterResource(),
+                        painter = painterResource(MR.images.img_lava_bucket),
                         contentDescription = null,
                         tint = Color.Unspecified,
                         modifier = Modifier.size(24.dp).clip(CircleShape).clickable {

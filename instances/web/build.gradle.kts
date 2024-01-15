@@ -1,52 +1,24 @@
 @file:Suppress("UnusedPrivateMember")
 
+import ru.astrainteractive.gradleplugin.util.ProjectProperties.projectInfo
+
+
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
-}
-val copyJsResources = tasks.create("copyJsResourcesWorkaround", Copy::class.java) {
-    from(projects.modules.services.resources.dependencyProject.file("build/generated/libres/js/resources"))
-    into("build/processedResources/js/main")
-}
-
-project.evaluationDependsOn(projects.modules.services.resources.dependencyProject.path)
-
-afterEvaluate {
-    val jsDevelopmentExecutableCompileSync by tasks.getting {
-        dependsOn(copyJsResources)
-        mustRunAfter(copyJsResources)
-    }
-
-    val jsProcessResources by tasks.getting {
-        finalizedBy(copyJsResources)
-    }
-
-    val jsBrowserDevelopmentExecutableDistributeResources by tasks.getting {
-        finalizedBy(copyJsResources)
-    }
-
-    val jsProductionExecutableCompileSync by tasks.getting {
-        finalizedBy(copyJsResources)
-    }
-    val jsBrowserProductionExecutableDistributeResources by tasks.getting {
-        finalizedBy(copyJsResources)
-    }
-
-    projects.modules.services.resources.dependencyProject.tasks.getByName("libresGenerateImages") {
-        finalizedBy(copyJsResources)
-    }
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
-    js {
+    js(IR) {
         moduleName = "web"
         browser {
             useCommonJs()
             commonWebpackConfig {
                 outputFileName = "web.js"
             }
-            binaries.executable()
         }
+        binaries.executable()
     }
 
     sourceSets {
@@ -72,11 +44,14 @@ kotlin {
                 implementation(libs.klibs.mikro.platform)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
+                // Resources
+                implementation(libs.moko.resources.core)
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
                 implementation(projects.modules.features.root)
                 implementation(projects.modules.services.dbApi)
+                implementation(projects.modules.services.resources)
             }
         }
 
@@ -90,4 +65,8 @@ kotlin {
 
 compose.experimental {
     web.application {}
+}
+
+multiplatformResources {
+    resourcesPackage.set("${projectInfo.group}.app")
 }
