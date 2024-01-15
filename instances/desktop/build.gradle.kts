@@ -16,7 +16,7 @@ kotlin {
     targetHierarchy.default()
     sourceSets {
         val jvmMain by getting {
-            resources.srcDirs("build/generated/moko/jvmMain/src")
+//            resources.srcDirs("build/generated/moko/jvmMain/src")
             dependencies {
                 // Compose
                 implementation(compose.desktop.currentOs)

@@ -10,13 +10,21 @@ import com.makeevrserg.koleso.feature.koleso.dialog.presentation.DefaultDialogCo
 import com.makeevrserg.koleso.feature.koleso.dialog.ui.DialogContent
 import com.makeevrserg.koleso.feature.koleso.root.presentation.DefaultRootKolesoComponent
 import com.makeevrserg.koleso.feature.koleso.root.ui.KolesoScreen
+import com.makeevrserg.koleso.resources.MR
 import com.makeevrserg.koleso.service.core.ui.theme.CustomTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.promise
 import org.jetbrains.skiko.wasm.onWasmReady
 import ru.astrainteractive.klibs.mikro.platform.DefaultJSPlatformConfiguration
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     onWasmReady {
+        CoroutineScope(Dispatchers.Main).promise {
+            val strings = MR.strings.stringsLoader.getOrLoad()
+        }
+
         val rootModule = com.makeevrserg.koleso.feature.root.di.RootModule.Default().apply {
             platformConfiguration.initialize { DefaultJSPlatformConfiguration() }
         }

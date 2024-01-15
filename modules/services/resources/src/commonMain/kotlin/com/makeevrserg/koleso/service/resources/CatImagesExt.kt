@@ -1,24 +1,24 @@
 package com.makeevrserg.koleso.service.resources
 
 import com.makeevrserg.koleso.resources.MR
-import io.github.skeptick.libres.images.Image
+import dev.icerock.moko.resources.ImageResource
 
 object CatImagesExt {
-    val MR.catImages: Array<Image>
+    val MR.catImages: Array<ImageResource>
         get() = arrayOf(
-            MR.image.cat_black,
-            MR.image.cat_calico,
-            MR.image.cat_red,
-            MR.image.cat_white,
-            MR.image.img_cat_jellie,
-            MR.image.img_cat_ocelot,
-            MR.image.img_cat_persian,
-            MR.image.img_cat_ragdoll,
-            MR.image.cat_red,
-            MR.image.img_cat_shorthair,
-            MR.image.img_cat_siamese,
-            MR.image.img_cat_tabby,
-            MR.image.img_cat_tuxedo,
-            MR.image.cat_white
+            MR.images.cat_black,
+            MR.images.cat_calico,
+            MR.images.cat_red,
+            MR.images.cat_white,
+            MR.images.img_cat_jellie,
+            MR.images.img_cat_ocelot,
+            MR.images.img_cat_persian,
+            MR.images.img_cat_ragdoll,
+            MR.images.cat_red,
+            MR.images.img_cat_shorthair,
+            MR.images.img_cat_siamese,
+            MR.images.img_cat_tabby,
+            MR.images.img_cat_tuxedo,
+            MR.images.cat_white
         )
 }

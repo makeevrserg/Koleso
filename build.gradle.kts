@@ -1,6 +1,5 @@
 buildscript {
     dependencies {
-        classpath(libs.moko.resources.generator)
         classpath("ru.astrainteractive.gradleplugin:convention:0.5.1")
         classpath("ru.astrainteractive.gradleplugin:android:0.5.1")
     }
@@ -14,8 +13,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.gradle.buildconfig) apply false
-    alias(libs.plugins.gradle.libres) apply false
     alias(libs.plugins.gradle.sqldelight) apply false
+    alias(libs.plugins.gradle.moko.resources.generator) apply false
 }
 apply(plugin = "ru.astrainteractive.gradleplugin.detekt")
 

@@ -33,8 +33,9 @@ kotlin {
                 implementation(libs.klibs.mikro.core)
                 // Coroutines
                 implementation(libs.kotlin.coroutines.core)
-                // Libres
-                implementation(libs.libres.compose)
+                // Moko-resources
+                implementation(libs.moko.resources.core)
+                implementation(libs.moko.resources.compose)
                 // Local
                 implementation(projects.modules.services.core)
                 implementation(projects.modules.services.coreUi)
